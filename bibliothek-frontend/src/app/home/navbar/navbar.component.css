@@ -1,0 +1,106 @@
+.container-nav {
+  max-width: 1700px;
+  margin: auto;
+  padding: 12px 25px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px auto 4px;
+  align-items: center;
+}
+
+a {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  justify-content: center;
+}
+
+.logo {
+  margin-top: -4px;
+}
+
+.nav-list {
+  display: flex;
+  gap: 9px;
+  list-style: none;
+  font-family: "Roboto Slab";
+}
+
+.active {
+  border: 0;
+  border-bottom-width: 0.14em;
+  border-style: solid;
+  padding-bottom: 0.3em;
+  color: #1b1b1b;
+}
+
+.nav-link {
+  font-size: 1rem;
+  color: #999999;
+  letter-spacing: 0.75px;
+  font-weight: 600;
+  transition: 0.2s;
+  padding: 25px 0 25px 50px;
+  border: 0;
+}
+
+.nav-link:hover {
+  color: #1b1b1b;
+}
+
+/* Hamburger Menu */
+
+.hamburger {
+  display: none;
+}
+
+.bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  transition: all 0.3s ease;
+  background-color: #3c4858;
+}
+
+@media (max-width: 960px) {
+  .hamburger {
+    display: block;
+  }
+
+  .hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .hamburger.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  .nav-list {
+    position: fixed;
+    right: -100%;
+    top: 90px;
+    gap: 0px;
+    flex-direction: column;
+    background-color: #ffffff;
+    width: 60%;
+    text-align: center;
+    transition: 0.3s ease;
+    z-index: 999;
+  }
+
+  .nav-item {
+    margin: 16px 0;
+  }
+
+  .nav-list.active {
+    right: 0;
+  }
+}
