@@ -9,5 +9,6 @@ import java.util.List;
 
 @Repository
 public interface LivroRepository extends JpaRepository<Livro, Long>{
-
+    List<Livro> findByDestaqueIsTrue();
+    Livro findById(long cod_livro);
 }

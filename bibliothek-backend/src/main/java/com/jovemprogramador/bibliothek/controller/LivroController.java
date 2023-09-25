@@ -23,6 +23,11 @@ public class LivroController {
         return repository.findAll();
     }
 
+    @GetMapping("/{cod_livro}")
+    public Livro findById(@PathVariable long cod_livro) {
+        return repository.findById(cod_livro);
+    }
+
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public void create(@RequestBody Livro livro) {
@@ -40,5 +45,14 @@ public class LivroController {
     @DeleteMapping("/{cod_livro}")
     public void delete(@Valid @RequestBody Livro livro, @PathVariable long cod_livro) {
         repository.deleteById(cod_livro);
+    }
+
+    @GetMapping("/destaque")
+    public List<Livro> getLivrosEmDestaque() {
+        List<Livro> livrosEmDestaque = repository.findByDestaqueIsTrue();
+        if (livrosEmDestaque.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No highlighted books found.");
+        }
+        return livrosEmDestaque;
     }
 }

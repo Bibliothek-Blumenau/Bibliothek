@@ -21,12 +21,13 @@ public class Livro {
     private long cod_livro;
 
     private String titulo;
-    private Genero genero;
+    private String genero;
     private String autor;
+    private String editora;
     private byte quantidade;
-    private boolean emprestado;
+    @Column(columnDefinition="TEXT")
     private String descricao;
     private String imagemUrl;
-    private LocalDateTime diaDeEmprestimo = LocalDateTime.now();
+    private boolean destaque;
 
 }

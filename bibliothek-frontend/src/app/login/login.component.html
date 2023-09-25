@@ -1,6 +1,5 @@
 <main class="container-login">
-    <div>
-        <img class="imagem-lateral" src="../../assets/img-login.jpg" alt="">
+    <div class="imagem-lateral">
     </div>
     <div class="informacoes">
         <a class="arrow" (click)="back()"><svg fill="#000000" version="1.1" id="Capa_1"
@@ -28,10 +27,14 @@
                     <input placeholder="***********" type="password" tabindex="2" required>
                 </fieldset>
                 <fieldset>
-                    <button name="submit" type="submit" id="contact-submit" data-submit="....Enviando">Login</button>
+                    <button name="submit" type="submit" id="contact-submit">Login</button>
                 </fieldset>
             </form>
             <a href="">Esqueceu sua Senha?</a>
+            <!-- MUDAR ISSO -->
+            <br>
+            <br>
+            <a [routerLink]="['/sistema']">Sistema</a>
         </div>
     </div>
 </main>

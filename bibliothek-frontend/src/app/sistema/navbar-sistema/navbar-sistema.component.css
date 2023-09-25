@@ -1,0 +1,90 @@
+.container-nav {
+  padding: 2px 25px;
+  margin: 10px;
+  border-radius: 6px 6px 0 0;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 14px -12px rgba(0, 0, 0, 0.53);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px auto 4px;
+  align-items: center;
+}
+
+a {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  justify-content: center;
+}
+
+.logo {
+  margin-top: -4px;
+}
+
+.nav-list {
+  display: flex;
+  gap: 9px;
+  list-style: none;
+  font-family: "Roboto Slab";
+}
+
+.nav-item {
+  display: flex;
+  gap: 35px;
+  align-items: center;
+}
+
+.nav-link {
+  font-size: 0.95rem;
+  color: black;
+  font-weight: 500;
+  transition: 0.2s;
+  padding: 8px 0;
+  border: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+svg {
+  width: 20px;
+  height: 20px;
+}
+
+.svg-link {
+  padding-right: 5px;
+}
+
+.profile-pic {
+  width: 45px;
+  height: 45px;
+  border-radius: 100%;
+  margin-right: 12px;
+}
+
+@media (max-width: 500px) {
+  .nav-item {
+    gap: 15px;
+  }
+
+  .nav-link {
+    font-size: 0.9rem;
+  }
+
+  .nav-list.active {
+    right: 0;
+  }
+
+  .profile-pic {
+    display: none;
+  }
+
+  .container-nav {
+    padding: 2px 10px;
+  }
+
+  .logo {
+    width: 90%;
+  }
+}
