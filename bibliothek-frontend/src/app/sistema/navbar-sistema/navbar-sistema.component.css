@@ -1,6 +1,6 @@
 .container-nav {
   padding: 2px 25px;
-  margin: 10px;
+  margin: 8px;
   border-radius: 6px 6px 0 0;
   background-color: #ffffff;
   box-shadow: 0px 4px 14px -12px rgba(0, 0, 0, 0.53);
@@ -24,6 +24,22 @@ a {
   margin-top: -4px;
 }
 
+.div-logo {
+  display: flex;
+  gap: 65px;
+}
+
+.nav-link-livros {
+  font-size: 19px;
+  margin-bottom: 3px;
+  color: black;
+}
+
+.nav-link-livros:hover {
+  color: rgb(137, 69, 214);
+  transition: 0.2s;
+}
+
 .nav-list {
   display: flex;
   gap: 9px;
@@ -42,7 +58,7 @@ a {
   color: black;
   font-weight: 500;
   transition: 0.2s;
-  padding: 8px 0;
+  padding: 4px 0;
   border: 0;
   font-family: "Roboto", sans-serif;
 }

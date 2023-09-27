@@ -1,7 +1,14 @@
 <header>
     <div class="container-nav">
         <nav>
-            <a [routerLink]="['/']"><img class="logo" src="../../../assets/logo.png" alt="Bibliothek Logo"></a>
+            <div class="div-logo">
+                <a [routerLink]="['/sistema']"><img class="logo" src="../../../assets/logo.png"
+                        alt="Bibliothek Logo"></a>
+                <a [routerLink]="['/sistema/livros']" class="nav-link-livros">
+                    Livros
+                </a>
+            </div>
+
             <ul class="nav-list">
                 <li class="nav-item">
                     <!-- MUDAR ISSO -->

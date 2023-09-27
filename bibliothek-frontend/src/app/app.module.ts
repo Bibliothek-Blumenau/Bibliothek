@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +12,12 @@ import { NavbarComponent } from './home/navbar/navbar.component';
 import { NavbarSistemaComponent } from './sistema/navbar-sistema/navbar-sistema.component';
 import { EmDestaqueComponent } from './sistema/em-destaque/em-destaque.component';
 import { ListaLivrosComponent } from './sistema/lista-livros/lista-livros.component';
+import { DetalhesLivroComponent } from './sistema/detalhes-livro/detalhes-livro.component';
+import { LivrosViewComponent } from './sistema/livros-view/livros-view.component';
+import { BarraBuscaComponent } from './sistema/barra-busca/barra-busca.component';
+import { BuscaLivrosComponent } from './sistema/busca-livros/busca-livros.component';
+import { TodosOsLivrosComponent } from './sistema/todos-os-livros/todos-os-livros.component';
+import { FooterComponent } from './sistema/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -22,8 +29,14 @@ import { ListaLivrosComponent } from './sistema/lista-livros/lista-livros.compon
     NavbarSistemaComponent,
     EmDestaqueComponent,
     ListaLivrosComponent,
+    DetalhesLivroComponent,
+    LivrosViewComponent,
+    BarraBuscaComponent,
+    BuscaLivrosComponent,
+    TodosOsLivrosComponent,
+    FooterComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

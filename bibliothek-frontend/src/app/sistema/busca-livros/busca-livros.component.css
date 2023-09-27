@@ -101,3 +101,7 @@ a {
   background: rgb(100, 28, 182);
   transition: 0.2s;
 }
+
+.nenhum-resultado {
+  margin-top: 25px;
+}

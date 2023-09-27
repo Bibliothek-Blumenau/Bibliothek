@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LivroApiService } from '../../livro-api.service';
+import { Livro } from 'src/app/livro';
 
 @Component({
   selector: 'app-em-destaque',
@@ -7,7 +8,7 @@ import { LivroApiService } from '../../livro-api.service';
   styleUrls: ['./em-destaque.component.css'],
 })
 export class EmDestaqueComponent {
-  livrosEmDestaque: any[] = [];
+  livrosEmDestaque: Livro[] = [];
 
   constructor(private livroApiService: LivroApiService) {}
 

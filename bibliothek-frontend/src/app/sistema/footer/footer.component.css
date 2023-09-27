@@ -1,0 +1,16 @@
+.footer {
+  padding: 20px 0;
+  background-color: #222222;
+  margin: 0 auto -1px;
+  width: 100%;
+  z-index: 999;
+}
+
+a {
+  color: rgb(199, 199, 199);
+  text-decoration: none;
+  text-align: center;
+  display: block;
+  font-size: 12px;
+  padding-top: 5px;
+}

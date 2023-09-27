@@ -1,0 +1,37 @@
+<main>
+    <app-navbar-sistema></app-navbar-sistema>
+    <app-barra-busca></app-barra-busca>
+    <div class="padding-bottom"></div>
+    <article class="container">
+        <div class="arrow"></div>
+        <figure class="placeholder">
+            <img class="foto" [src]="livro?.imagemUrl" />
+        </figure>
+        <section class="section">
+            <div>
+                <h2 class="titulo">{{ livro?.titulo }}</h2>
+                <p class="autor">{{ livro?.autor }}</p>
+                <p class="descricao">{{ livro?.descricao }}</p>
+            </div>
+            <div class="info-container">
+                <div class="info">
+                    <h3 class="info-header">Quantidade Disponível</h3>
+                    <p class="info-detalhes">{{ livro?.quantidade }}</p>
+                </div>
+                <div class="info">
+                    <h3 class="info-header">Editora</h3>
+                    <p class="info-detalhes">{{ livro?.editora }}</p>
+                </div>
+                <div class="info">
+                    <h3 class="info-header">Gênero</h3>
+                    <p class="info-detalhes">{{ livro?.genero }}</p>
+                </div>
+            </div>
+            <form>
+                <button class="button">Agendar Empréstimo</button>
+            </form>
+        </section>
+    </article>
+    <app-lista-livros></app-lista-livros>
+</main>
+<app-footer></app-footer>

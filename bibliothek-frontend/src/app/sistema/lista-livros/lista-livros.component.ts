@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LivroApiService } from '../../livro-api.service';
+import { Livro } from 'src/app/livro';
 
 @Component({
   selector: 'app-lista-livros',
@@ -7,7 +8,7 @@ import { LivroApiService } from '../../livro-api.service';
   styleUrls: ['./lista-livros.component.css'],
 })
 export class ListaLivrosComponent {
-  livros: any[] = [];
+  livros: Livro[] = [];
 
   constructor(private livroApiService: LivroApiService) {}
 

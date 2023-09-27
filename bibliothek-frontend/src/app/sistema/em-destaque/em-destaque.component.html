@@ -1,20 +1,11 @@
 <article class="container">
     <h2>Em Destaque</h2>
     <div class="em-destaque">
-        <a [routerLink]="[livro.cod_livro]" class="livro-em-destaque" *ngFor="let livro of livrosEmDestaque">
-            <img class="livro-img" [src]="livro.imagemUrl" alt="{{ livro.title }}" />
+        <a [routerLink]="['/sistema/detalhes', livro.cod_livro]" class="livro-em-destaque"
+            *ngFor="let livro of livrosEmDestaque">
+            <img class="livro-img" [src]="livro.imagemUrl" alt="{{ livro.titulo }}" />
             <h4 class="livro-titulo">{{ livro.titulo }}</h4>
             <p class="livro-autor">{{ livro.autor }}</p>
         </a>
     </div>
-    <h2>Lista de Livros</h2>
-    <form action="get" class="search-bar">
-        <input class="barra-busca" type="text" name="livro" placeholder="Buscar livros">
-        <select name="tipo" class="dropdown">
-            <option value="nome">Título</option>
-            <option value="genero">Gênero</option>
-            <option value="autor">Autor</option>
-        </select>
-        <button class="buscar" type="button">Buscar</button>
-    </form>
 </article>

@@ -1,0 +1,162 @@
+main {
+  background-image: url(../../../assets/background.jpg);
+  background-repeat: no-repeat;
+  padding: 1px 0px;
+  min-height: 100vh;
+}
+
+.padding-bottom {
+  padding-bottom: 40px;
+}
+
+.flex {
+  display: flex;
+}
+
+.foto {
+  border-radius: 2px;
+  display: block;
+  margin: auto;
+  width: 315px;
+  height: 450px;
+  border-style: solid;
+  border-width: 0.8px;
+  border-color: #b9b9b9;
+}
+
+.placeholder {
+  width: 315px;
+  height: 450px;
+  border-radius: 2px;
+}
+
+.arrow {
+  width: 10px;
+  height: 40px;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  max-width: 1300px;
+  min-height: 600px;
+  width: 100%;
+  padding: 50px 10px 20px 10px;
+  border-radius: 2px;
+  margin: auto;
+  gap: 35px;
+  background-color: white;
+}
+
+.section {
+  padding: 0 30px 0 25px;
+}
+
+@media (max-width: 1280px) {
+  .container {
+    flex-direction: column;
+    padding: 25px;
+    gap: 15px;
+  }
+}
+
+@media (max-width: 1280px) {
+  .container {
+    flex-direction: column;
+    padding: 25px;
+    gap: 15px;
+  }
+
+  .placeholder {
+    min-width: 0;
+    min-height: 0;
+    margin: auto;
+    border-radius: 8px;
+  }
+
+  .info-container {
+    margin-bottom: 20px;
+  }
+}
+
+.titulo {
+  font-size: 35px;
+  margin-bottom: 2.5px;
+}
+
+.autor {
+  color: rgb(118, 124, 134);
+  margin-bottom: 13px;
+  font-size: 18px;
+}
+
+.descricao {
+  color: #34323b;
+  margin-top: 40px;
+  margin-bottom: 4px;
+  font-size: 16px;
+  line-height: 25px;
+  letter-spacing: 0.2px;
+  white-space: pre-wrap;
+}
+
+@media (max-width: 330px) {
+  .descricao {
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
+
+.info-container {
+  padding: 0 25px;
+  margin-top: 60px;
+  display: grid;
+  column-gap: 2rem;
+  row-gap: 2.5rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.info {
+  padding-top: 12px;
+  border-color: rgb(229 231 235);
+  border-width: 0;
+  border-top-width: 1px;
+  border-style: solid;
+  text-align: center;
+}
+
+.info-header {
+  color: #34323b;
+}
+
+.info-detalhes {
+  color: rgb(90, 95, 104);
+  font-size: 0.97rem;
+  line-height: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+figcaption {
+  font-size: 17px;
+  margin-top: 10px;
+  text-align: center;
+  color: rgb(60, 63, 70);
+  font-style: italic;
+}
+
+.button {
+  font-size: 17px;
+  padding: 17px 45px;
+  border: none;
+  background: rgb(79, 21, 145);
+  color: white;
+  border-radius: 2px;
+  cursor: pointer;
+  display: block;
+  margin: 65px auto 0;
+}
+
+.button:hover {
+  background: rgb(100, 28, 182);
+  transition: 0.2s;
+}
