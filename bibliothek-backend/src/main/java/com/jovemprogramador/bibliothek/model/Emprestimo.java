@@ -9,26 +9,39 @@ import lombok.Setter;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
-@Table(name="TB_Livro")
+@Table(name = "TB_Emprestimo")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Emprestimo {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long cod_emprestimo;
-    @OneToOne
-    private Livro cod_livro;
-    @OneToOne
-    private User matricula;
+
     @Column(name = "data_emprestimo", columnDefinition = "DATE")
     private LocalDateTime dataEmprestimo = LocalDateTime.now();
+
     @Column(name = "data_entrega", columnDefinition = "DATE")
     private LocalDateTime dataEntrega = dataEmprestimo.plus(Duration.ofDays(14));
+
     private BigDecimal multa;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToMany
+    @JoinTable(
+            name = "TB_EmprestimoLivro",
+            joinColumns = @JoinColumn(name = "emprestimo_id"),
+            inverseJoinColumns = @JoinColumn(name = "livro_id")
+    )
+    private List<Livro> livros;
 
     public BigDecimal calcularMulta() {
         LocalDateTime dataAtual = LocalDateTime.now();

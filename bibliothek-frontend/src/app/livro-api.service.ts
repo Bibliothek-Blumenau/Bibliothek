@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { LivroSearch } from './livro-search';
 
@@ -8,27 +8,45 @@ import { LivroSearch } from './livro-search';
 })
 export class LivroApiService {
   private apiUrl = 'http://localhost:8080/api/livros';
+  private authHeader: string;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    // Codificar as credenciais user e password em base64
+    this.authHeader = 'Basic ' + btoa('0:password');
+  }
 
   getLivrosEmDestaque(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/destaque`);
+    const headers = new HttpHeaders({
+      Authorization: this.authHeader, // Adicionar o cabeçalho de autenticação
+    });
+
+    return this.http.get<any[]>(`${this.apiUrl}/destaque`, { headers });
   }
 
   getAllLivros(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}`);
+    const headers = new HttpHeaders({
+      Authorization: this.authHeader,
+    });
+    return this.http.get<any[]>(`${this.apiUrl}`, { headers });
   }
 
   getLivroById(bookId: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${bookId}`);
+    const headers = new HttpHeaders({
+      Authorization: this.authHeader,
+    });
+    return this.http.get<any>(`${this.apiUrl}/${bookId}`, { headers });
   }
 
   buscarLivros(livroSearch: LivroSearch): Observable<any[]> {
+    const headers = new HttpHeaders({
+      Authorization: this.authHeader,
+    });
+
     const params = {
       titulo: livroSearch.titulo,
       tipo: livroSearch.tipo,
     };
 
-    return this.http.get<any[]>(`${this.apiUrl}/busca`, { params });
+    return this.http.get<any[]>(`${this.apiUrl}/busca`, { headers, params });
   }
 }

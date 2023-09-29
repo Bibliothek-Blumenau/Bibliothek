@@ -30,6 +30,8 @@ public class WebSecurityConfig {
         return http
                 .csrf((csrf) -> csrf.disable()) // habilita e desabila recursos de segurança
                 .authorizeHttpRequests((auth) -> auth
+                        .requestMatchers("/api/livros").permitAll()
+                        .requestMatchers("/api/livros/*").permitAll()
                         .anyRequest().authenticated()
                 )
                 .userDetailsService(myUserDetailsService)
