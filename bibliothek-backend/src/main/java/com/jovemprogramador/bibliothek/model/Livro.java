@@ -1,8 +1,6 @@
 package com.jovemprogramador.bibliothek.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
