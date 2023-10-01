@@ -1,46 +1,59 @@
 package com.jovemprogramador.bibliothek.security;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 
 import com.jovemprogramador.bibliothek.service.JpaUserDetailsService;
 
-import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 public class WebSecurityConfig {
 
-    private final JpaUserDetailsService myUserDetailsService;
+    @Autowired
+    private SecurityFilter securityFilter;
 
-    public WebSecurityConfig(JpaUserDetailsService myUserDetailsService) {
-        this.myUserDetailsService = myUserDetailsService;
+    @Autowired
+    private JpaUserDetailsService myUserDetailsService;
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+            throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
     }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
-                .csrf((csrf) -> csrf.disable()) // habilita e desabila recursos de segurança
+                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/api/livros").permitAll()
-                        .requestMatchers("/api/livros/*").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/auth/register").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/auth/user/*").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/auth/user/*").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/livros").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/livros").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/livros").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
-                .userDetailsService(myUserDetailsService)
-                .httpBasic(withDefaults())
+                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 
     @Bean
-    PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }

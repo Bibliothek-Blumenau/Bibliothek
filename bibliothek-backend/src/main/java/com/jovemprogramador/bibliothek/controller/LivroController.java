@@ -6,7 +6,6 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -20,25 +19,22 @@ public class LivroController {
     @Autowired
     private LivroRepository livroRepository;
 
-    @PreAuthorize("hasRole('USER')")
     @GetMapping
     public List<Livro> findAll() {
         return livroRepository.findAll();
     }
-    @PreAuthorize("hasRole('USER')")
+
     @GetMapping("/{cod_livro}")
     public Livro findById(@PathVariable long cod_livro) {
         return livroRepository.findById(cod_livro);
     }
 
-    @PreAuthorize("hasRole('USER')")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public void create(@RequestBody Livro livro) {
         livroRepository.save(livro);
     }
 
-    @PreAuthorize("hasRole('USER')")
     @PutMapping("/{cod_livro}")
     public void update(@Valid @RequestBody Livro livro, @PathVariable long cod_livro) {
         if (!livroRepository.existsById(cod_livro)) {
@@ -47,13 +43,11 @@ public class LivroController {
         livroRepository.save(livro);
     }
 
-    @PreAuthorize("hasRole('USER')")
     @DeleteMapping("/{cod_livro}")
     public void delete(@Valid @RequestBody Livro livro, @PathVariable long cod_livro) {
         livroRepository.deleteById(cod_livro);
     }
 
-    @PreAuthorize("hasRole('USER')")
     @GetMapping("/destaque")
     public List<Livro> getLivrosEmDestaque() {
         List<Livro> livrosEmDestaque = livroRepository.findByDestaqueIsTrue();
@@ -63,7 +57,6 @@ public class LivroController {
         return livrosEmDestaque;
     }
 
-    @PreAuthorize("hasRole('USER')")
     @GetMapping("/busca")
     public ResponseEntity<List<Livro>> buscarLivrosPorTipo(
             @RequestParam(name = "titulo", required = false) String titulo,
