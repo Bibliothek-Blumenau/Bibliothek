@@ -6,6 +6,7 @@ import com.jovemprogramador.bibliothek.security.LoginForm;
 import com.jovemprogramador.bibliothek.security.LoginResponse;
 import com.jovemprogramador.bibliothek.security.RegisterForm;
 import com.jovemprogramador.bibliothek.service.TokenService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -38,11 +39,11 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody RegisterForm registerRequest){
+    public ResponseEntity<?> register(@RequestBody  @Valid RegisterForm registerRequest){
         if(this.repository.findByMatricula(registerRequest.matricula()) != null) return ResponseEntity.badRequest().build();
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(registerRequest.password());
-        User newUser = new User(registerRequest.matricula(),registerRequest.matricula(), encryptedPassword, registerRequest.roles());
+        User newUser = new User(registerRequest.matricula(),registerRequest.nomeCompleto(), encryptedPassword, registerRequest.roles());
 
         this.repository.save(newUser);
 

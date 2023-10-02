@@ -5,7 +5,7 @@ export interface Livro {
   autor: string;
   editora: string;
   quantidade: number;
-  descricao: string;
   imagemUrl: string;
   destaque: boolean;
+  descricao: string;
 }

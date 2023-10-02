@@ -18,23 +18,22 @@
         <div class="informacoes-box">
             <a [routerLink]="['/']"><img class="logo" src="../../assets/logo-login.png" alt=""></a>
             <h2></h2>
-            <form id="contact" action="" method="post">
+            <form id="contact" (ngSubmit)="onSubmit()">
                 <h3 class="heading-login">Faça login na sua conta</h3>
                 <fieldset>
-                    <input placeholder="Digite sua Matrícula" type="text" name="login" tabindex="1" required autofocus>
+                    <input placeholder="Digite sua Matrícula" type="text" name="matricula" [(ngModel)]="matricula"
+                        tabindex="1" required autofocus>
                 </fieldset>
                 <fieldset>
-                    <input placeholder="***********" type="password" tabindex="2" required>
+                    <input placeholder="***********" type="password" [(ngModel)]="password" name="password" tabindex="2"
+                        required>
                 </fieldset>
                 <fieldset>
-                    <button name="submit" type="submit" id="contact-submit">Login</button>
+                    <button type="submit" id="contact-submit">Login</button>
                 </fieldset>
             </form>
+            <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
             <a href="">Esqueceu sua Senha?</a>
-            <!-- MUDAR ISSO -->
-            <br>
-            <br>
-            <a [routerLink]="['/sistema']">Sistema</a>
         </div>
     </div>
 </main>

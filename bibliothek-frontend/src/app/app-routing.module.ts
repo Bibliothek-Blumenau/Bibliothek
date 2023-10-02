@@ -6,14 +6,40 @@ import { SistemaComponent } from './sistema/sistema.component';
 import { DetalhesLivroComponent } from './sistema/detalhes-livro/detalhes-livro.component';
 import { LivrosViewComponent } from './sistema/livros-view/livros-view.component';
 import { TodosOsLivrosComponent } from './sistema/todos-os-livros/todos-os-livros.component';
+import { AuthGuard } from './auth.guard';
+import { CadastrarLivrosComponent } from './sistema/cadastrar-livros/cadastrar-livros.component';
+import { CadastrarUsuarioComponent } from './sistema/cadastrar-usuario/cadastrar-usuario.component';
+import { AdminAuthGuard } from './admin.auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'sistema', component: SistemaComponent },
-  { path: 'sistema/detalhes/:cod_livro', component: DetalhesLivroComponent },
-  { path: 'sistema/livros', component: TodosOsLivrosComponent },
-  { path: 'sistema/buscarlivros', component: LivrosViewComponent },
+  { path: 'sistema', component: SistemaComponent, canActivate: [AuthGuard] },
+  {
+    path: 'sistema/detalhes/:cod_livro',
+    component: DetalhesLivroComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'sistema/livros',
+    component: TodosOsLivrosComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'sistema/buscarlivros',
+    component: LivrosViewComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'sistema/cadastrarlivros',
+    component: CadastrarLivrosComponent,
+    canActivate: [AuthGuard, AdminAuthGuard],
+  },
+  {
+    path: 'sistema/cadastrarusuario',
+    component: CadastrarUsuarioComponent,
+    canActivate: [AuthGuard, AdminAuthGuard],
+  },
 ];
 
 @NgModule({

@@ -9,7 +9,7 @@
 nav {
   display: flex;
   justify-content: space-between;
-  margin: 8px auto 4px;
+  padding: 8px 0 4px;
   align-items: center;
 }
 
@@ -27,6 +27,8 @@ a {
 .div-logo {
   display: flex;
   gap: 65px;
+  align-items: center;
+  height: 50px;
 }
 
 .nav-link-livros {
@@ -61,6 +63,44 @@ a {
   padding: 4px 0;
   border: 0;
   font-family: "Roboto", sans-serif;
+}
+
+.nav-dropdown {
+  position: relative;
+  display: flex;
+  height: 100%;
+}
+
+.nav-dropdown .dropdown-toggle {
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  display: block;
+  position: absolute;
+  top: 100%;
+  left: -15px;
+  background-color: #fff;
+  box-shadow: 0px 4px 14px -12px rgba(0, 0, 0, 0.53);
+  z-index: 1;
+  min-width: 180px; /* Adjust the width as needed */
+  border-radius: 0 0 4px 4px; /* Add rounded corners */
+  overflow: hidden; /* Hide overflowing content */
+  opacity: 1;
+  transition: opacity 0.2s;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 18px 18px;
+  width: 120%;
+  text-decoration: none;
+  color: #000;
+  transition: background-color 0.2s;
+}
+
+.dropdown-menu a:hover {
+  background-color: #f1f1f1;
 }
 
 svg {

@@ -18,7 +18,7 @@ public class BibliothekApplication {
 	/*@Bean
 	CommandLineRunner commandLineRunner(UserRepository users, PasswordEncoder encoder) {
 		return args -> {
-			users.save(new User("0","admin",encoder.encode("password"),"ROLE_USER,ROLE_ADMIN"));
+			users.save(new User("0","Administrador",encoder.encode("password"),"ROLE_USER,ROLE_ADMIN"));
 		};
 	}
 */

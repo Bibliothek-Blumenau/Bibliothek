@@ -93,3 +93,8 @@ a {
 
 @media (max-width: 940px) {
 }
+
+.error-message {
+  color: red;
+  margin-bottom: 10px;
+}

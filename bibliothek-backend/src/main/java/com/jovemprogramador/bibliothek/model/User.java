@@ -1,6 +1,7 @@
 package com.jovemprogramador.bibliothek.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,11 +23,11 @@ public class User implements UserDetails {
 
     @Id
     private String matricula;
-    @NotNull
+    @NotEmpty
     private String nomeCompleto;
-    @NotNull
+    @NotEmpty
     private String password;
-    @NotNull
+    @NotEmpty
     private String roles;
 
     @OneToMany(mappedBy = "user")

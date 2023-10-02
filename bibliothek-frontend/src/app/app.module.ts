@@ -18,6 +18,8 @@ import { BarraBuscaComponent } from './sistema/barra-busca/barra-busca.component
 import { BuscaLivrosComponent } from './sistema/busca-livros/busca-livros.component';
 import { TodosOsLivrosComponent } from './sistema/todos-os-livros/todos-os-livros.component';
 import { FooterComponent } from './sistema/footer/footer.component';
+import { CadastrarLivrosComponent } from './sistema/cadastrar-livros/cadastrar-livros.component';
+import { CadastrarUsuarioComponent } from './sistema/cadastrar-usuario/cadastrar-usuario.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { FooterComponent } from './sistema/footer/footer.component';
     BuscaLivrosComponent,
     TodosOsLivrosComponent,
     FooterComponent,
+    CadastrarLivrosComponent,
+    CadastrarUsuarioComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
