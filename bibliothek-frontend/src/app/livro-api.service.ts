@@ -47,4 +47,16 @@ export class LivroApiService {
     };
     return this.http.get<any[]>(`${this.apiUrl}/busca`, { headers, params });
   }
+
+  editarLivro(livro: Livro): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.http.put(`${this.apiUrl}/${livro.cod_livro}`, livro, {
+      headers,
+    });
+  }
+
+  apagarLivro(codLivro: number): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.http.delete(`${this.apiUrl}/${codLivro}`, { headers });
+  }
 }

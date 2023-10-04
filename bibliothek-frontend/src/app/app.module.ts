@@ -20,6 +20,7 @@ import { TodosOsLivrosComponent } from './sistema/todos-os-livros/todos-os-livro
 import { FooterComponent } from './sistema/footer/footer.component';
 import { CadastrarLivrosComponent } from './sistema/cadastrar-livros/cadastrar-livros.component';
 import { CadastrarUsuarioComponent } from './sistema/cadastrar-usuario/cadastrar-usuario.component';
+import { PerfilUsuarioComponent } from './sistema/perfil-usuario/perfil-usuario.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { CadastrarUsuarioComponent } from './sistema/cadastrar-usuario/cadastrar
     FooterComponent,
     CadastrarLivrosComponent,
     CadastrarUsuarioComponent,
+    PerfilUsuarioComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],

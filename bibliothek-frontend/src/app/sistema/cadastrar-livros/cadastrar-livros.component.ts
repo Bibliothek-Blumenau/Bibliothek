@@ -21,6 +21,8 @@ export class CadastrarLivrosComponent {
   };
 
   message: string = '';
+  messageSuccess: boolean = false;
+  messageError: boolean = false;
 
   constructor(private livroApiService: LivroApiService) {}
 
@@ -28,10 +30,14 @@ export class CadastrarLivrosComponent {
     this.livroApiService.createLivro(this.livro).subscribe(
       (response) => {
         this.clearForm();
+        this.messageSuccess = true;
+        this.messageError = false;
         this.message = 'Livro cadastrado com sucesso!';
       },
       (error) => {
         this.clearForm();
+        this.messageSuccess = false;
+        this.messageError = true;
         this.message = 'Erro ao cadastrar livro.';
       }
     );

@@ -44,7 +44,7 @@ public class LivroController {
     }
 
     @DeleteMapping("/{cod_livro}")
-    public void delete(@Valid @RequestBody Livro livro, @PathVariable long cod_livro) {
+    public void delete(@PathVariable long cod_livro) {
         livroRepository.deleteById(cod_livro);
     }
 

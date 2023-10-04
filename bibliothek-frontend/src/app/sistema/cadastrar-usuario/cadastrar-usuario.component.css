@@ -9,10 +9,6 @@ main {
   padding-bottom: 40px;
 }
 
-.flex {
-  display: flex;
-}
-
 .arrow {
   width: 20px;
   height: 40px;
@@ -174,4 +170,16 @@ button {
   padding: 10px;
   font-size: 17px;
   border-radius: 4px;
+}
+
+.message {
+  margin-bottom: 15px;
+}
+
+.sucesso {
+  color: green;
+}
+
+.erro {
+  color: red;
 }

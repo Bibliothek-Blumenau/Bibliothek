@@ -1,0 +1,59 @@
+<main>
+    <app-navbar-sistema></app-navbar-sistema>
+    <div class="padding-bottom"></div>
+    <article class="container">
+        <img class="profile-pic" [src]="getProfilePic() || '../../../assets/profile-picture.png'" alt="Foto de perfil">
+        <h2 class="titulo">{{ getCurrentUserName() }}</h2>
+        <div id="informacoes" *ngIf="mostrarInformacoes">
+            <div class="info">
+                <h3 class="info-header">Livros Agendados</h3>
+                <ul>
+                    <li class="info-agendados">Livro 1</li>
+                    <li class="info-agendados">Livro 2</li>
+                </ul>
+            </div>
+            <div class="info-2">
+                <h3 class="info-header">Empréstimos</h3>
+                <p class="info-emprestimos">Detalhes do empréstimo</p>
+            </div>
+            <div class="button-div">
+                <button class="button" (click)="mostrarAdicionarFoto()">Alterar Foto</button>
+                <button class="button" (click)="mostrarAlterarSenha()">Alterar Senha</button>
+            </div>
+        </div>
+        <div id="adicionar-foto" *ngIf="mostrarFoto">
+            <form (ngSubmit)="alterarFotoPerfil()">
+                <fieldset>
+                    <label for="fotoPerfil">Alterar foto de perfil</label>
+                    <input placeholder="URL da foto" type="text" name="fotoPerfil" id="fotoPerfil"
+                        [(ngModel)]="usuario.fotoPerfil">
+                </fieldset>
+                <fieldset>
+                    <div class="button-div">
+                        <a class="button" (click)="voltarParaInformacoes()">Cancelar</a>
+                        <button type="submit" class="button">Salvar</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div id="alterar-senha" *ngIf="mostrarSenha">
+            <form (ngSubmit)="alterarSenha()">
+                <fieldset>
+                    <label for="password">Alterar Senha</label>
+                    <input class="input-senha" placeholder="*********" type="password" name="password" id="password"
+                        [(ngModel)]="usuario.password">
+                </fieldset>
+                <fieldset>
+                    <div class="button-div">
+                        <a class="button" (click)="voltarParaInformacoes()">Cancelar</a>
+                        <button type="submit" class="button">Salvar</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div class="message" [class.sucesso]="messageSuccess" [class.erro]="messageError">
+            <h3>{{ message }}</h3>
+        </div>
+    </article>
+</main>
+<app-footer></app-footer>

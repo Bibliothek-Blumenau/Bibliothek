@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable, map } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -32,7 +32,7 @@ export class AuthService {
 
   getUserInfo(
     matricula: string
-  ): Observable<{ nomeCompleto: string; roles: string }> {
+  ): Observable<{ nomeCompleto: string; roles: string; fotoPerfil: string }> {
     const headers = this.getAuthHeaders();
     return this.http
       .get<any>(`http://localhost:8080/api/users/${matricula}`, { headers })
@@ -40,8 +40,37 @@ export class AuthService {
         map((response: any) => ({
           nomeCompleto: response.nomeCompleto,
           roles: response.roles,
+          fotoPerfil: response.fotoPerfil,
         }))
       );
+  }
+
+  atualizarFotoPerfil(novaFotoPerfil: string): Observable<any> {
+    const matricula = localStorage.getItem('matricula');
+    const headers = this.getAuthHeaders();
+
+    return this.http
+      .put(
+        `${this.apiUrl}/user/${matricula}/foto`,
+        { fotoPerfil: novaFotoPerfil },
+        { headers }
+      )
+      .pipe(
+        tap(() => {
+          localStorage.setItem('fotoPerfil', novaFotoPerfil);
+        })
+      );
+  }
+
+  atualizarSenha(novaSenha: string): Observable<any> {
+    const matricula = localStorage.getItem('matricula');
+    const headers = this.getAuthHeaders();
+
+    return this.http.put(
+      `${this.apiUrl}/user/${matricula}/senha`,
+      { password: novaSenha },
+      { headers }
+    );
   }
 
   isAdmin(): boolean {

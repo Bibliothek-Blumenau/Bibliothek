@@ -37,6 +37,14 @@ export class NavbarSistemaComponent {
     return localStorage.getItem('nomeCompleto') || '';
   }
 
+  getMatricula(): string {
+    return localStorage.getItem('matricula') || '';
+  }
+
+  getProfilePic(): string {
+    return localStorage.getItem('fotoPerfil') || '';
+  }
+
   isAdmin(): boolean {
     const roles = localStorage.getItem('roles');
     return !!roles && roles.includes('ROLE_ADMIN');

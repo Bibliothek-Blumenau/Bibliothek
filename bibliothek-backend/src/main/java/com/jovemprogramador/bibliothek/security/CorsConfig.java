@@ -14,10 +14,9 @@ public class CorsConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
 
-        // Allow your frontend origin(s) here
-        config.addAllowedOrigin("http://localhost:4200");
-        config.addAllowedHeader("*"); // You can configure specific headers
-        config.addAllowedMethod("*"); // You can configure specific HTTP methods
+        config.addAllowedOrigin("*"); // Mudar para URL do site após publicar o projeto
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
 
         source.registerCorsConfiguration("/**", config);
 

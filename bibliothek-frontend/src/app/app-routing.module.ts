@@ -10,6 +10,8 @@ import { AuthGuard } from './auth.guard';
 import { CadastrarLivrosComponent } from './sistema/cadastrar-livros/cadastrar-livros.component';
 import { CadastrarUsuarioComponent } from './sistema/cadastrar-usuario/cadastrar-usuario.component';
 import { AdminAuthGuard } from './admin.auth.guard';
+import { PerfilUsuarioComponent } from './sistema/perfil-usuario/perfil-usuario.component';
+import { ProfileGuard } from './profile.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -29,6 +31,11 @@ const routes: Routes = [
     path: 'sistema/buscarlivros',
     component: LivrosViewComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: 'sistema/usuario/:matricula',
+    component: PerfilUsuarioComponent,
+    canActivate: [AuthGuard, ProfileGuard],
   },
   {
     path: 'sistema/cadastrarlivros',

@@ -41,7 +41,7 @@
                         <button type="submit" id="cadastrar">Cadastrar</button>
                     </fieldset>
                 </form>
-                <div class="message">
+                <div class="message" [class.sucesso]="messageSuccess" [class.erro]="messageError">
                     <h3>{{ message }}</h3>
                 </div>
             </div>

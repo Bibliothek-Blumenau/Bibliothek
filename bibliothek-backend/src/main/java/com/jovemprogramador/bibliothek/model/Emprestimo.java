@@ -1,10 +1,6 @@
 package com.jovemprogramador.bibliothek.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.Duration;
@@ -13,10 +9,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "TB_Emprestimo")
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class Emprestimo {
 
     @Id
@@ -43,6 +35,18 @@ public class Emprestimo {
     )
     private List<Livro> livros;
 
+    public Emprestimo(long cod_emprestimo, LocalDateTime dataEmprestimo, LocalDateTime dataEntrega, BigDecimal multa, User user, List<Livro> livros) {
+        this.cod_emprestimo = cod_emprestimo;
+        this.dataEmprestimo = dataEmprestimo;
+        this.dataEntrega = dataEntrega;
+        this.multa = multa;
+        this.user = user;
+        this.livros = livros;
+    }
+
+    public Emprestimo() {
+    }
+
     public BigDecimal calcularMulta() {
         LocalDateTime dataAtual = LocalDateTime.now();
 
@@ -55,5 +59,53 @@ public class Emprestimo {
         }
 
         return multa;
+    }
+
+    public long getCod_emprestimo() {
+        return this.cod_emprestimo;
+    }
+
+    public LocalDateTime getDataEmprestimo() {
+        return this.dataEmprestimo;
+    }
+
+    public LocalDateTime getDataEntrega() {
+        return this.dataEntrega;
+    }
+
+    public BigDecimal getMulta() {
+        return this.multa;
+    }
+
+    public User getUser() {
+        return this.user;
+    }
+
+    public List<Livro> getLivros() {
+        return this.livros;
+    }
+
+    public void setCod_emprestimo(long cod_emprestimo) {
+        this.cod_emprestimo = cod_emprestimo;
+    }
+
+    public void setDataEmprestimo(LocalDateTime dataEmprestimo) {
+        this.dataEmprestimo = dataEmprestimo;
+    }
+
+    public void setDataEntrega(LocalDateTime dataEntrega) {
+        this.dataEntrega = dataEntrega;
+    }
+
+    public void setMulta(BigDecimal multa) {
+        this.multa = multa;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setLivros(List<Livro> livros) {
+        this.livros = livros;
     }
 }

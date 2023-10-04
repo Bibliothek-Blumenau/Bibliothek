@@ -22,15 +22,15 @@
                     <div class="dropdown-menu" *ngIf="isDropdownOpen" (mouseenter)="openDropdown()">
                         <a class="dropdown-item" [routerLink]="['/sistema/cadastrarlivros']">Cadastrar Livros</a>
                         <a class="dropdown-item" [routerLink]="['/sistema/cadastrarusuario']">Cadastrar Usuario</a>
-                        <!-- Add more admin options here -->
                     </div>
                 </div>
             </div>
 
             <ul class="nav-list">
                 <li class="nav-item">
-                    <a [routerLink]="['user/id-usuario']" class="nav-link">
-                        <img class="profile-pic" src="../../../assets/profile.jpg" alt="">
+                    <a [routerLink]="['/sistema/usuario', getMatricula()]" class="nav-link">
+                        <img class="profile-pic" [src]="getProfilePic() || '../../../assets/profile-picture.png'"
+                            alt="Foto de perfil" alt="">
                         {{ getCurrentUserName() }}
                     </a>
                     <a class="svg-link" [routerLink]="['/']" (click)="logout()"><svg fill="#000000" height="800px"

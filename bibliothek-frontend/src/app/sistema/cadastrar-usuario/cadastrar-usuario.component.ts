@@ -11,10 +11,12 @@ export class CadastrarUsuarioComponent {
     matricula: '',
     nomeCompleto: '',
     password: '',
-    roles: 'ROLE_USER', // Default role is 'Aluno'
+    roles: 'ROLE_USER',
   };
 
   message: string = '';
+  messageSuccess: boolean = false;
+  messageError: boolean = false;
 
   constructor(private authService: AuthService) {}
 
@@ -22,10 +24,14 @@ export class CadastrarUsuarioComponent {
     this.authService.registerUser(this.usuario).subscribe(
       (response) => {
         this.clearForm();
+        this.messageSuccess = true;
+        this.messageError = false;
         this.message = 'Usuário cadastrado com sucesso!';
       },
       (error) => {
         this.clearForm();
+        this.messageSuccess = false;
+        this.messageError = true;
         this.message = 'Erro ao cadastrar usuário.';
       }
     );

@@ -145,6 +145,11 @@ figcaption {
   font-style: italic;
 }
 
+.div-button {
+  margin-top: 65px;
+  display: flex;
+}
+
 .button {
   font-size: 17px;
   padding: 17px 45px;
@@ -154,10 +159,117 @@ figcaption {
   border-radius: 2px;
   cursor: pointer;
   display: block;
-  margin: 65px auto 0;
+  margin: 0 auto 0;
 }
 
 .button:hover {
   background: rgb(100, 28, 182);
   transition: 0.2s;
+}
+
+.container-editar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 1300px;
+  min-height: 600px;
+  width: 100%;
+  padding: 50px 220px 20px 220px;
+  border-radius: 2px;
+  margin: 0 auto 15px;
+  background-color: white;
+  box-shadow: 0px 4px 14px -12px rgba(0, 0, 0, 0.53);
+}
+
+.container-editar h2 {
+  margin-bottom: 35px;
+}
+
+form {
+  display: grid;
+  column-gap: 2rem;
+  row-gap: 1.4rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+form fieldset:last-child {
+  grid-column: span 2;
+}
+
+fieldset {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  margin: 0 0 10px;
+  min-width: 100%;
+  padding: 0;
+  width: 100%;
+}
+
+label {
+  font-size: 18px;
+}
+
+input {
+  width: 240px;
+  height: 40px;
+  border: 1px solid #ccc;
+  background: #fff;
+  margin: 10px 0 5px;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 17px;
+  outline: 0;
+}
+
+#destaque {
+  display: block;
+  height: 20px;
+  width: 80px;
+  margin: 0;
+}
+
+.destaque-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+textarea {
+  height: 150px;
+  margin-top: 10px;
+  font-size: 16px;
+  font-family: "Roboto";
+}
+
+.button-edit {
+  cursor: pointer;
+  text-align: center;
+  width: 240px;
+  border: none;
+  background: #000000;
+  color: rgb(255, 255, 255);
+  margin: 25px auto 15px;
+  padding: 10px;
+  font-size: 17px;
+  border-radius: 4px;
+}
+
+.button-div {
+  display: flex;
+}
+
+.message {
+  margin-top: 35px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.sucesso {
+  color: green;
+}
+
+.erro {
+  color: red;
 }

@@ -20,9 +20,14 @@ export class LoginComponent {
           localStorage.setItem('token', response.token);
           localStorage.setItem('matricula', this.matricula);
           this.authService.getUserInfo(this.matricula).subscribe(
-            (userInfo: { nomeCompleto: string; roles: string }) => {
+            (userInfo: {
+              nomeCompleto: string;
+              roles: string;
+              fotoPerfil: string;
+            }) => {
               localStorage.setItem('nomeCompleto', userInfo.nomeCompleto);
               localStorage.setItem('roles', userInfo.roles);
+              localStorage.setItem('fotoPerfil', userInfo.fotoPerfil);
             },
             (error: any) => {
               console.error('Failed to fetch user info', error);

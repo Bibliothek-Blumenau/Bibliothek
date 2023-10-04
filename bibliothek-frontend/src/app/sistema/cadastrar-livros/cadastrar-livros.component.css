@@ -6,17 +6,7 @@ main {
 }
 
 .padding-bottom {
-  padding-bottom: 30px;
-}
-
-.flex {
-  display: flex;
-}
-
-.placeholder {
-  width: 315px;
-  height: 450px;
-  border-radius: 2px;
+  padding-bottom: 40px;
 }
 
 .arrow {
@@ -189,4 +179,16 @@ button {
   padding: 10px;
   font-size: 17px;
   border-radius: 4px;
+}
+
+.message {
+  margin-bottom: 15px;
+}
+
+.sucesso {
+  color: green;
+}
+
+.erro {
+  color: red;
 }
