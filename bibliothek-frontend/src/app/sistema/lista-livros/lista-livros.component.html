@@ -1,4 +1,4 @@
-<div class="lista-livros container">
+<div class="lista-livros container" id="anchor">
     <div class="lista-livro-header">
         <p class="header-titulo">Título</p>
         <p class="header-editora">Editora</p>
@@ -17,4 +17,9 @@
         <p class="lista-livro-genero">{{ livro.genero }}</p>
         <a class="mais-detalhes" [routerLink]="['/sistema/detalhes', livro.cod_livro]">Mais Detalhes</a>
     </a>
+    <div class="pagination">
+        <button class="button-page" (click)="prevPage()" [disabled]="currentPage === 0">Anterior</button>
+        <span>{{ currentPage + 1 }} de {{ totalPages }}</span>
+        <button class="button-page" (click)="nextPage()" [disabled]="currentPage === totalPages - 1">Próxima</button>
+    </div>
 </div>

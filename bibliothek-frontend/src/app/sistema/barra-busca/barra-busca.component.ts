@@ -19,6 +19,13 @@ export class BarraBuscaComponent {
   ) {}
 
   realizarBusca(): void {
+    if (this.livroSearch.titulo.length < 3) {
+      const errorMessage =
+        'Você precisa digitar no mínimo uma palavra com 3 ou mais caracteres válidos para realizar a busca.';
+      window.alert(errorMessage);
+      return;
+    }
+
     this.livroApiService.buscarLivros(this.livroSearch).subscribe((livros) => {
       this.resultadoBuscaService.atualizarResultadosBusca(livros);
       console.log('Resultados da busca:', livros);

@@ -8,6 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 
@@ -20,8 +23,12 @@ public class LivroController {
     private LivroRepository livroRepository;
 
     @GetMapping
-    public List<Livro> findAll() {
-        return livroRepository.findAll();
+    public Page<Livro> findAll(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size // ou o tamanho que preferir
+    ) {
+        Pageable pageable = PageRequest.of(page, size);
+        return livroRepository.findAll(pageable);
     }
 
     @GetMapping("/{cod_livro}")

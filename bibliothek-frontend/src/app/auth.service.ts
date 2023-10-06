@@ -18,6 +18,18 @@ export class AuthService {
     });
   }
 
+  isTokenValid(): boolean {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return false;
+    }
+
+    const tokenData = JSON.parse(atob(token.split('.')[1]));
+    const expirationDate = new Date(tokenData.exp * 1000);
+
+    return expirationDate > new Date();
+  }
+
   login(matricula: string, password: string): Observable<any> {
     const credentials = { matricula, password };
     return this.http.post(`${this.apiUrl}/login`, credentials);
@@ -83,6 +95,7 @@ export class AuthService {
     localStorage.removeItem('matricula');
     localStorage.removeItem('nomeCompleto');
     localStorage.removeItem('roles');
+    localStorage.removeItem('fotoPerfil');
     this.router.navigate(['/']);
   }
 

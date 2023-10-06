@@ -15,37 +15,52 @@ import { ProfileGuard } from './profile.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'sistema', component: SistemaComponent, canActivate: [AuthGuard] },
+  {
+    path: 'login',
+    component: LoginComponent,
+    title: 'Bibliothek - Login',
+  },
+  {
+    path: 'sistema',
+    component: SistemaComponent,
+    canActivate: [AuthGuard],
+    title: 'Bibliothek - Plataforma',
+  },
   {
     path: 'sistema/detalhes/:cod_livro',
     component: DetalhesLivroComponent,
     canActivate: [AuthGuard],
+    title: 'Bibliothek - Detalhes',
   },
   {
     path: 'sistema/livros',
     component: TodosOsLivrosComponent,
     canActivate: [AuthGuard],
+    title: 'Bibliothek - Livros',
   },
   {
     path: 'sistema/buscarlivros',
     component: LivrosViewComponent,
     canActivate: [AuthGuard],
+    title: 'Bibliothek - Buscar Livros',
   },
   {
     path: 'sistema/usuario/:matricula',
     component: PerfilUsuarioComponent,
     canActivate: [AuthGuard, ProfileGuard],
+    title: 'Bibliothek - Perfil',
   },
   {
     path: 'sistema/cadastrarlivros',
     component: CadastrarLivrosComponent,
     canActivate: [AuthGuard, AdminAuthGuard],
+    title: 'Bibliothek - Cadastro de Livros',
   },
   {
     path: 'sistema/cadastrarusuario',
     component: CadastrarUsuarioComponent,
     canActivate: [AuthGuard, AdminAuthGuard],
+    title: 'Bibliothek - Cadastro de Usuários',
   },
 ];
 

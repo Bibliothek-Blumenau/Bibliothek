@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { LivroSearch } from './livro-search';
 import { Livro } from './livro';
+import { Page, Pageable } from './pageable';
 
 @Injectable({
   providedIn: 'root',
@@ -24,9 +25,13 @@ export class LivroApiService {
     return this.http.get<any[]>(`${this.apiUrl}/destaque`, { headers });
   }
 
-  getAllLivros(): Observable<any[]> {
+  getAllLivros(page: number, size: number): Observable<Page<any>> {
     const headers = this.getAuthHeaders();
-    return this.http.get<any[]>(`${this.apiUrl}`, { headers });
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('size', size.toString());
+
+    return this.http.get<Page<any>>(`${this.apiUrl}`, { headers, params });
   }
 
   getLivroById(bookId: string): Observable<any> {

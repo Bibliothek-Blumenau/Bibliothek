@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { LivroApiService } from '../../livro-api.service';
 import { Livro } from 'src/app/livro';
 
@@ -9,12 +9,48 @@ import { Livro } from 'src/app/livro';
 })
 export class ListaLivrosComponent {
   livros: Livro[] = [];
+  currentPage = 0;
+  pageSize = 8;
+  totalPages = 0;
 
-  constructor(private livroApiService: LivroApiService) {}
+  constructor(
+    private livroApiService: LivroApiService,
+    private el: ElementRef
+  ) {}
 
   ngOnInit(): void {
-    this.livroApiService.getAllLivros().subscribe((livros) => {
-      this.livros = livros;
-    });
+    this.carregarLivros();
+  }
+
+  carregarLivros() {
+    this.livroApiService
+      .getAllLivros(this.currentPage, this.pageSize)
+      .subscribe((page) => {
+        this.livros = page.content;
+        this.totalPages = page.totalPages;
+        this.scrollToAnchor();
+        window.scrollBy(0, -70);
+      });
+  }
+
+  scrollToAnchor() {
+    const element = this.el.nativeElement.querySelector('#anchor');
+    if (element) {
+      element.scrollIntoView();
+    }
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages - 1) {
+      this.currentPage++;
+      this.carregarLivros();
+    }
+  }
+
+  prevPage() {
+    if (this.currentPage > 0) {
+      this.currentPage--;
+      this.carregarLivros();
+    }
   }
 }
