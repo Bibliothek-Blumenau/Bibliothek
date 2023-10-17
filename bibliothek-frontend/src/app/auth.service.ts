@@ -73,6 +73,17 @@ export class AuthService {
         })
       );
   }
+  uploadImageToImgbb(imageData: string): Observable<any> {
+    const formData = new FormData();
+    formData.append('key', 'd0176b7d250adadd6c772429c8ff233b');
+    formData.append('image', imageData);
+
+    const headers = new HttpHeaders();
+
+    return this.http.post('https://api.imgbb.com/1/upload', formData, {
+      headers,
+    });
+  }
 
   atualizarSenha(novaSenha: string): Observable<any> {
     const matricula = localStorage.getItem('matricula');

@@ -42,7 +42,7 @@ export class CadastrarUsuarioComponent {
       matricula: '',
       nomeCompleto: '',
       password: '',
-      roles: 'ROLE_USER', // Default role is 'Aluno'
+      roles: 'ROLE_USER',
     };
     this.message = '';
   }

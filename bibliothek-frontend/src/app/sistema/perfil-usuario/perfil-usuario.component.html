@@ -21,12 +21,26 @@
                 <button class="button" (click)="mostrarAlterarSenha()">Alterar Senha</button>
             </div>
         </div>
-        <div id="adicionar-foto" *ngIf="mostrarFoto">
+        <!-- <div id="adicionar-foto" *ngIf="mostrarFoto">
             <form (ngSubmit)="alterarFotoPerfil()">
                 <fieldset>
                     <label for="fotoPerfil">Alterar foto de perfil</label>
                     <input placeholder="URL da foto" type="text" name="fotoPerfil" id="fotoPerfil"
                         [(ngModel)]="usuario.fotoPerfil">
+                </fieldset>
+                <fieldset>
+                    <div class="button-div">
+                        <a class="button" (click)="voltarParaInformacoes()">Cancelar</a>
+                        <button type="submit" class="button">Salvar</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div> -->
+        <div id="adicionar-foto" *ngIf="mostrarFoto">
+            <form (ngSubmit)="alterarFotoPerfil()">
+                <fieldset>
+                    <label for="fotoPerfil">Alterar foto de perfil</label>
+                    <input type="file" (change)="onFileSelected($event)" accept=".jpg, .jpeg, .png, .gif">
                 </fieldset>
                 <fieldset>
                     <div class="button-div">

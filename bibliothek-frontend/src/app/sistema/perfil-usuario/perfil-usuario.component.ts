@@ -50,27 +50,56 @@ export class PerfilUsuarioComponent {
   }
 
   alterarFotoPerfil() {
-    const novaFotoPerfil = this.usuario.fotoPerfil;
+    let novaFotoPerfil = this.usuario.fotoPerfil;
 
     if (!novaFotoPerfil) {
-      this.message = 'A URL da foto de perfil não pode estar vazia.';
+      this.message = 'Por favor, selecione uma imagem.';
       return;
     }
 
-    this.authService.atualizarFotoPerfil(novaFotoPerfil).subscribe(
-      () => {
-        this.messageSuccess = true;
-        this.messageError = false;
-        this.message = 'Foto de perfil atualizada com sucesso!';
-        this.voltarParaInformacoes();
+    if (novaFotoPerfil.match(/^data:image\/[^;]+;base64,/)) {
+      novaFotoPerfil = novaFotoPerfil.replace(/^data:image\/[^;]+;base64,/, '');
+    }
+
+    this.authService.uploadImageToImgbb(novaFotoPerfil).subscribe(
+      (response: any) => {
+        const imageUrl = response.data.url;
+        this.authService.atualizarFotoPerfil(imageUrl).subscribe(
+          () => {
+            this.messageSuccess = true;
+            this.messageError = false;
+            this.message = 'Foto de perfil atualizada com sucesso!';
+            this.voltarParaInformacoes();
+          },
+          (error) => {
+            this.messageSuccess = false;
+            this.messageError = true;
+            this.message = 'Erro ao atualizar a foto de perfil.';
+            console.error(error);
+          }
+        );
       },
       (error) => {
         this.messageSuccess = false;
         this.messageError = true;
-        this.message = 'Erro ao atualizar a foto de perfil.';
+        this.message = 'Erro ao fazer o upload da imagem.';
         console.error(error);
       }
     );
+  }
+
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        this.usuario.fotoPerfil = reader.result as string;
+      };
+
+      reader.readAsDataURL(file);
+    }
   }
 
   alterarSenha() {
