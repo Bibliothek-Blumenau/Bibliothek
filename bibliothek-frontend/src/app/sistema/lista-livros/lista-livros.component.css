@@ -94,14 +94,14 @@ a {
   font-size: 14px;
   padding: 14px 30px;
   border: none;
-  background: rgb(79, 21, 145);
+  background: rgb(100, 28, 182);
   color: white;
   border-radius: 2px;
   cursor: pointer;
 }
 
 .mais-detalhes:hover {
-  background: rgb(100, 28, 182);
+  background: rgb(79, 21, 145);
   transition: 0.2s;
 }
 

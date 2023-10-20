@@ -9,7 +9,8 @@ public class Livro {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long cod_livro;
+    @Column(name = "cod_livro")
+    private long codLivro;
     @NotEmpty
     private String titulo;
     @NotEmpty
@@ -27,7 +28,7 @@ public class Livro {
     private String descricao;
 
     public Livro(long cod_livro, @NotEmpty String titulo, @NotEmpty String genero, @NotEmpty String autor, @NotEmpty String editora, byte quantidade, @NotEmpty String imagemUrl, boolean destaque, @NotEmpty String descricao) {
-        this.cod_livro = cod_livro;
+        this.codLivro = cod_livro;
         this.titulo = titulo;
         this.genero = genero;
         this.autor = autor;
@@ -42,7 +43,7 @@ public class Livro {
     }
 
     public long getCod_livro() {
-        return this.cod_livro;
+        return this.codLivro;
     }
 
     public @NotEmpty String getTitulo() {
@@ -77,8 +78,8 @@ public class Livro {
         return this.descricao;
     }
 
-    public void setCod_livro(long cod_livro) {
-        this.cod_livro = cod_livro;
+    public void setCod_livro(long codLivro) {
+        this.codLivro = codLivro;
     }
 
     public void setTitulo(@NotEmpty String titulo) {

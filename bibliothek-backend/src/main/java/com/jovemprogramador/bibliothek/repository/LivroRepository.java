@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface LivroRepository extends JpaRepository<Livro, Long>{
     List<Livro> findByDestaqueIsTrue();
-    Livro findById(long cod_livro);
+    Livro findById(long codLivro);
     List<Livro> findAllByTituloLike(String titulo);
     List<Livro> findAllByAutorLike(String titulo);
     List<Livro> findAllByGeneroLike(String titulo);

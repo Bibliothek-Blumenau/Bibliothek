@@ -1,6 +1,6 @@
 <form class="search-bar">
     <input class="barra-busca" type="text" [(ngModel)]="livroSearch.titulo" name="titulo"
-        placeholder="Digite o Título do Livro, Autor ou Gênero">
+        placeholder="Digite o Título do Livro, Autor ou Gênero" (keyup.enter)="realizarBusca()">
     <select [(ngModel)]="livroSearch.tipo" name="tipo" class="dropdown">
         <option [selected] value="titulo">Título</option>
         <option value="autor">Autor</option>

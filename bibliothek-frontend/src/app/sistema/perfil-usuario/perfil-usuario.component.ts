@@ -68,7 +68,7 @@ export class PerfilUsuarioComponent {
           () => {
             this.messageSuccess = true;
             this.messageError = false;
-            this.message = 'Foto de perfil atualizada com sucesso!';
+            this.message = 'Upload realizado com sucesso!';
             this.voltarParaInformacoes();
           },
           (error) => {
