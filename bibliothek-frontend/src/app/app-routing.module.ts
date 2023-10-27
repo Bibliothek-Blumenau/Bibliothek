@@ -12,6 +12,7 @@ import { CadastrarUsuarioComponent } from './sistema/cadastrar-usuario/cadastrar
 import { AdminAuthGuard } from './admin.auth.guard';
 import { PerfilUsuarioComponent } from './sistema/perfil-usuario/perfil-usuario.component';
 import { ProfileGuard } from './profile.guard';
+import { EmprestimosComponent } from './sistema/emprestimos/emprestimos.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -27,7 +28,7 @@ const routes: Routes = [
     title: 'Bibliothek - Plataforma',
   },
   {
-    path: 'sistema/detalhes/:cod_livro',
+    path: 'sistema/detalhes/:codLivro',
     component: DetalhesLivroComponent,
     canActivate: [AuthGuard],
     title: 'Bibliothek - Detalhes',
@@ -61,6 +62,12 @@ const routes: Routes = [
     component: CadastrarUsuarioComponent,
     canActivate: [AuthGuard, AdminAuthGuard],
     title: 'Bibliothek - Cadastro de Usuários',
+  },
+  {
+    path: 'sistema/emprestimos',
+    component: EmprestimosComponent,
+    canActivate: [AuthGuard, AdminAuthGuard],
+    title: 'Bibliothek - Empréstimos',
   },
 ];
 

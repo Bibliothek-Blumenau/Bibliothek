@@ -3,7 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LivroApiService } from '../../livro-api.service';
 import { of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { Livro } from 'src/app/livro'; // Substitua pelo caminho correto para a sua interface Livro
+import { Livro } from 'src/app/livro';
+import { EmprestimoService } from 'src/app/emprestimo.service';
 
 @Component({
   selector: 'app-detalhes-livro',
@@ -12,6 +13,7 @@ import { Livro } from 'src/app/livro'; // Substitua pelo caminho correto para a 
 })
 export class DetalhesLivroComponent implements OnInit {
   livro: Livro | null = null;
+  matricula: string | null = localStorage.getItem('matricula');
   mostrarInformacoes: boolean = true;
   mostrarEditar: boolean = false;
   message: string = '';
@@ -21,16 +23,17 @@ export class DetalhesLivroComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private livroApiService: LivroApiService,
-    private router: Router
+    private router: Router,
+    private emprestimoService: EmprestimoService
   ) {}
 
   ngOnInit(): void {
     this.route.params
       .pipe(
         switchMap((params) => {
-          const cod_livro = params['cod_livro'];
-          if (cod_livro) {
-            return this.livroApiService.getLivroById(cod_livro);
+          const codLivro = params['codLivro'];
+          if (codLivro) {
+            return this.livroApiService.getLivroById(codLivro);
           } else {
             return of(null);
           }
@@ -44,6 +47,29 @@ export class DetalhesLivroComponent implements OnInit {
   isAdmin(): boolean {
     const roles = localStorage.getItem('roles');
     return !!roles && roles.includes('ROLE_ADMIN');
+  }
+
+  agendarEmprestimo(codLivro: number, matricula: string) {
+    if (!confirm('Tem certeza de que deseja agendar este livro?')) {
+      return;
+    }
+
+    this.emprestimoService.agendarEmprestimo(codLivro, matricula).subscribe(
+      (response) => {
+        this.messageSuccess = true;
+        this.messageError = false;
+        this.message = 'Livro agendado com sucesso!';
+        if (this.livro) {
+          this.livro.quantidade = this.livro.quantidade - 1;
+        }
+      },
+      (error) => {
+        this.messageSuccess = false;
+        this.messageError = true;
+        this.message = 'Erro ao agendar livro.';
+        console.error(error);
+      }
+    );
   }
 
   mostrarEditarLivro() {
@@ -82,7 +108,7 @@ export class DetalhesLivroComponent implements OnInit {
     }
 
     if (this.livro) {
-      this.livroApiService.apagarLivro(this.livro.cod_livro).subscribe(
+      this.livroApiService.apagarLivro(this.livro.codLivro).subscribe(
         () => {
           this.message = '';
           this.router.navigate(['/sistema/livros']);

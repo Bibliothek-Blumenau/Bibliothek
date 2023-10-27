@@ -2,7 +2,6 @@ package com.jovemprogramador.bibliothek.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
@@ -11,7 +10,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 
 @Entity
 @Table(name = "TB_User")
@@ -27,9 +25,6 @@ public class User implements UserDetails {
     private String roles;
     private String fotoPerfil;
 
-    @OneToMany(mappedBy = "user")
-    private List<Emprestimo> emprestimos;
-
     public User(String matricula, String nomeCompleto, String password, String roles, String fotoPerfil) {
         this.matricula = matricula;
         this.nomeCompleto = nomeCompleto;
@@ -40,6 +35,7 @@ public class User implements UserDetails {
 
     public User() {
     }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -91,16 +87,8 @@ public class User implements UserDetails {
         return this.roles;
     }
 
-    public List<Emprestimo> getEmprestimos() {
-        return this.emprestimos;
-    }
-
     public String getFotoPerfil() {
-        return fotoPerfil;
-    }
-
-    public void setFotoPerfil(String fotoPerfil) {
-        this.fotoPerfil = fotoPerfil;
+        return this.fotoPerfil;
     }
 
     public void setMatricula(String matricula) {
@@ -119,7 +107,7 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
-    public void setEmprestimos(List<Emprestimo> emprestimos) {
-        this.emprestimos = emprestimos;
+    public void setFotoPerfil(String fotoPerfil) {
+        this.fotoPerfil = fotoPerfil;
     }
 }

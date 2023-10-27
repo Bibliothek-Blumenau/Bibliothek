@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -21,6 +20,8 @@ import { FooterComponent } from './sistema/footer/footer.component';
 import { CadastrarLivrosComponent } from './sistema/cadastrar-livros/cadastrar-livros.component';
 import { CadastrarUsuarioComponent } from './sistema/cadastrar-usuario/cadastrar-usuario.component';
 import { PerfilUsuarioComponent } from './sistema/perfil-usuario/perfil-usuario.component';
+import { DatePipe } from '@angular/common';
+import { EmprestimosComponent } from './sistema/emprestimos/emprestimos.component';
 
 @NgModule({
   declarations: [
@@ -41,9 +42,10 @@ import { PerfilUsuarioComponent } from './sistema/perfil-usuario/perfil-usuario.
     CadastrarLivrosComponent,
     CadastrarUsuarioComponent,
     PerfilUsuarioComponent,
+    EmprestimosComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

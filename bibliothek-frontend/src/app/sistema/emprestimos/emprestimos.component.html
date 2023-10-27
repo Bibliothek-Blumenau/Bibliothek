@@ -1,0 +1,45 @@
+<main>
+    <app-navbar-sistema></app-navbar-sistema>
+    <div class="padding-bottom"></div>
+    <article class="container">
+        <div id="informacoes">
+            <div class="info">
+                <h3 class="info-header">Empréstimos</h3>
+                <div class="lista-livros container2" id="anchor">
+                    <div class="lista-livro-header">
+                        <p class="header-titulo">Título</p>
+                        <p class="header-editora">Nome do Usuário</p>
+                        <p class="header-editora">Data do Empréstimo</p>
+                        <p class="header-genero">Data limite</p>
+                        <p class="header-detalhes">Situação</p>
+                        <p class="header-detalhes">Gerenciar Empréstimos</p>
+                    </div>
+                    <a class="lista-livro-link" *ngFor="let emprestimo of emprestimos">
+                        <div class="img-titulo">
+                            <img class="lista-livro-img" [src]="emprestimo.livro.imagemUrl"
+                                alt="{{ emprestimo.livro.titulo }}" />
+                            <div>
+                                <h4 class="lista-livro-titulo">{{ emprestimo.livro.titulo }}</h4>
+                                <p class="lista-livro-autor">{{ emprestimo.livro.autor }}</p>
+                            </div>
+                        </div>
+                        <p class="lista-livro-editora">{{ emprestimo.usuario.nomeCompleto }}</p>
+                        <p class="lista-livro-editora">{{ emprestimo.dataEmprestimo | date:'dd/MM/yyyy' }}</p>
+                        <p class="lista-livro-genero">{{ emprestimo.dataEntrega | date:'dd/MM/yyyy' }}</p>
+                        <p class="mais-detalhes">{{ emprestimo.status }}</p>
+                        <button *ngIf="emprestimo.status === 'Pendente'"
+                            (click)="aprovarEmprestimo(emprestimo.codEmprestimo)">Aprovar</button>
+
+                        <button *ngIf="emprestimo.status === 'Emprestado'"
+                            (click)="finalizarEmprestimo(emprestimo.codEmprestimo)">Finalizar</button>
+                        <button *ngIf="emprestimo.status === 'Finalizado'" disabled>Finalizado</button>
+                    </a>
+                </div>
+                <div class="message" [class.sucesso]="messageSuccess" [class.erro]="messageError">
+                    <h3>{{ message }}</h3>
+                </div>
+            </div>
+        </div>
+    </article>
+</main>
+<app-footer></app-footer>

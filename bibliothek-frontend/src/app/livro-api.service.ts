@@ -34,9 +34,9 @@ export class LivroApiService {
     return this.http.get<Page<any>>(`${this.apiUrl}`, { headers, params });
   }
 
-  getLivroById(bookId: string): Observable<any> {
+  getLivroById(codLivro: string): Observable<any> {
     const headers = this.getAuthHeaders();
-    return this.http.get<any>(`${this.apiUrl}/${bookId}`, { headers });
+    return this.http.get<any>(`${this.apiUrl}/${codLivro}`, { headers });
   }
 
   createLivro(livro: Livro): Observable<any> {
@@ -55,7 +55,7 @@ export class LivroApiService {
 
   editarLivro(livro: Livro): Observable<any> {
     const headers = this.getAuthHeaders();
-    return this.http.put(`${this.apiUrl}/${livro.cod_livro}`, livro, {
+    return this.http.put(`${this.apiUrl}/${livro.codLivro}`, livro, {
       headers,
     });
   }

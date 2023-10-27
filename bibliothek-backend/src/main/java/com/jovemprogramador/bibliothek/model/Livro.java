@@ -2,6 +2,7 @@ package com.jovemprogramador.bibliothek.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "TB_Livro")
@@ -9,7 +10,7 @@ public class Livro {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cod_livro")
+    @Column(name = "codLivro")
     private long codLivro;
     @NotEmpty
     private String titulo;
@@ -19,7 +20,8 @@ public class Livro {
     private String autor;
     @NotEmpty
     private String editora;
-    private byte quantidade;
+    @NotNull
+    private int quantidade;
     @NotEmpty
     private String imagemUrl;
     private boolean destaque;
@@ -27,8 +29,8 @@ public class Livro {
     @NotEmpty
     private String descricao;
 
-    public Livro(long cod_livro, @NotEmpty String titulo, @NotEmpty String genero, @NotEmpty String autor, @NotEmpty String editora, byte quantidade, @NotEmpty String imagemUrl, boolean destaque, @NotEmpty String descricao) {
-        this.codLivro = cod_livro;
+    public Livro(long codLivro, @NotEmpty String titulo, @NotEmpty String genero, @NotEmpty String autor, @NotEmpty String editora, @NotNull int quantidade, @NotEmpty String imagemUrl, boolean destaque, @NotEmpty String descricao) {
+        this.codLivro = codLivro;
         this.titulo = titulo;
         this.genero = genero;
         this.autor = autor;
@@ -42,7 +44,7 @@ public class Livro {
     public Livro() {
     }
 
-    public long getCod_livro() {
+    public long getCodLivro() {
         return this.codLivro;
     }
 
@@ -62,7 +64,7 @@ public class Livro {
         return this.editora;
     }
 
-    public byte getQuantidade() {
+    public @NotNull int getQuantidade() {
         return this.quantidade;
     }
 
@@ -78,7 +80,7 @@ public class Livro {
         return this.descricao;
     }
 
-    public void setCod_livro(long codLivro) {
+    public void setCodLivro(long codLivro) {
         this.codLivro = codLivro;
     }
 
@@ -98,7 +100,7 @@ public class Livro {
         this.editora = editora;
     }
 
-    public void setQuantidade(byte quantidade) {
+    public void setQuantidade(@NotNull int quantidade) {
         this.quantidade = quantidade;
     }
 

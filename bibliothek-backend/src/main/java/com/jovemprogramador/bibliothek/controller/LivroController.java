@@ -32,9 +32,9 @@ public class LivroController {
         return livroRepository.findAll(pageable);
     }
 
-    @GetMapping("/{cod_livro}")
-    public Livro findById(@PathVariable long cod_livro) {
-        return livroRepository.findById(cod_livro);
+    @GetMapping("/{codLivro}")
+    public Livro findById(@PathVariable long codLivro) {
+        return livroRepository.findById(codLivro);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -43,17 +43,17 @@ public class LivroController {
         livroRepository.save(livro);
     }
 
-    @PutMapping("/{cod_livro}")
-    public void update(@Valid @RequestBody Livro livro, @PathVariable long cod_livro) {
-        if (!livroRepository.existsById(cod_livro)) {
+    @PutMapping("/{codLivro}")
+    public void update(@Valid @RequestBody Livro livro, @PathVariable long codLivro) {
+        if (!livroRepository.existsById(codLivro)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Livro não encontrado.");
         }
         livroRepository.save(livro);
     }
 
-    @DeleteMapping("/{cod_livro}")
-    public void delete(@PathVariable long cod_livro) {
-        livroRepository.deleteById(cod_livro);
+    @DeleteMapping("/{codLivro}")
+    public void delete(@PathVariable long codLivro) {
+        livroRepository.deleteById(codLivro);
     }
 
     @GetMapping("/destaque")

@@ -1,5 +1,5 @@
 export interface Livro {
-  cod_livro: number;
+  codLivro: number;
   titulo: string;
   genero: string;
   autor: string;

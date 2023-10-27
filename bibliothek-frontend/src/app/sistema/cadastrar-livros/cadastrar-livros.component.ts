@@ -9,7 +9,7 @@ import { Livro } from 'src/app/livro';
 })
 export class CadastrarLivrosComponent {
   livro: Livro = {
-    cod_livro: 0,
+    codLivro: 0,
     titulo: '',
     genero: '',
     autor: '',
@@ -45,7 +45,7 @@ export class CadastrarLivrosComponent {
 
   clearForm() {
     this.livro = {
-      cod_livro: 0,
+      codLivro: 0,
       titulo: '',
       genero: '',
       autor: '',

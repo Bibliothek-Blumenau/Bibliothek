@@ -1,7 +1,7 @@
 <article class="container">
     <h2>Em Destaque</h2>
     <div class="em-destaque">
-        <a [routerLink]="['/sistema/detalhes', livro.cod_livro]" class="livro-em-destaque"
+        <a [routerLink]="['/sistema/detalhes', livro.codLivro]" class="livro-em-destaque"
             *ngFor="let livro of livrosEmDestaque">
             <img class="livro-img" [src]="livro.imagemUrl" alt="{{ livro.titulo }}" />
             <h4 class="livro-titulo">{{ livro.titulo }}</h4>

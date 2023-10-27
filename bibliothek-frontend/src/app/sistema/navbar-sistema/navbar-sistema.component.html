@@ -20,6 +20,7 @@
                             </g>
                         </svg></a>
                     <div class="dropdown-menu" *ngIf="isDropdownOpen" (mouseenter)="openDropdown()">
+                        <a class="dropdown-item" [routerLink]="['/sistema/emprestimos']">Empréstimos</a>
                         <a class="dropdown-item" [routerLink]="['/sistema/cadastrarlivros']">Cadastrar Livros</a>
                         <a class="dropdown-item" [routerLink]="['/sistema/cadastrarusuario']">Cadastrar Usuario</a>
                     </div>

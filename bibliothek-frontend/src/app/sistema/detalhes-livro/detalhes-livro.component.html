@@ -28,7 +28,8 @@
                 </div>
             </div>
             <div class="div-button">
-                <button class="button">Agendar Empréstimo</button>
+                <button class="button" (click)="agendarEmprestimo(livro!.codLivro, matricula!)">Agendar
+                    Empréstimo</button>
                 <button class="button" *ngIf="isAdmin()" (click)="mostrarEditarLivro()">Editar Livro</button>
                 <button class="button" *ngIf="isAdmin()" (click)="apagarLivro()">Apagar Livro</button>
             </div>

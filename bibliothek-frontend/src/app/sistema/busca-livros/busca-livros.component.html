@@ -8,7 +8,7 @@
                 <p class="header-genero">Gênero</p>
                 <p class="header-detalhes">Detalhes</p>
             </div>
-            <a class="lista-livro-link" [routerLink]="['/sistema/detalhes', livro.cod_livro]"
+            <a class="lista-livro-link" [routerLink]="['/sistema/detalhes', livro.codLivro]"
                 *ngFor="let livro of livros">
                 <div class="img-titulo">
                     <img class="lista-livro-img" [src]="livro.imagemUrl" alt="{{ livro.titulo }}" />
@@ -19,7 +19,7 @@
                 </div>
                 <p class="lista-livro-editora">{{ livro.editora }}</p>
                 <p class="lista-livro-genero">{{ livro.genero }}</p>
-                <a class="mais-detalhes" [routerLink]="['/sistema/detalhes', livro.cod_livro]">Mais Detalhes</a>
+                <a class="mais-detalhes" [routerLink]="['/sistema/detalhes', livro.codLivro]">Mais Detalhes</a>
             </a>
         </div>
     </ng-container>
