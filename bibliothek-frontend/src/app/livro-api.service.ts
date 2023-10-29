@@ -53,6 +53,17 @@ export class LivroApiService {
     return this.http.get<any[]>(`${this.apiUrl}/busca`, { headers, params });
   }
 
+  getRecomendacoesPorGenero(genero: string): Observable<any[]> {
+    const headers = this.getAuthHeaders();
+    const params = {
+      genero: genero,
+    };
+    return this.http.get<any[]>(`${this.apiUrl}/recomendacoes`, {
+      headers,
+      params,
+    });
+  }
+
   editarLivro(livro: Livro): Observable<any> {
     const headers = this.getAuthHeaders();
     return this.http.put(`${this.apiUrl}/${livro.codLivro}`, livro, {

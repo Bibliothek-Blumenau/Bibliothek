@@ -11,6 +11,8 @@ main {
 
 .flex {
   display: flex;
+  flex-direction: row;
+  gap: 20px;
 }
 
 .foto {
@@ -28,25 +30,38 @@ main {
   width: 315px;
   height: 450px;
   border-radius: 2px;
-}
-
-.arrow {
-  width: 10px;
-  height: 40px;
+  margin-left: 30px;
 }
 
 .container {
-  display: flex;
-  flex-direction: row;
   max-width: 1300px;
   min-height: 600px;
   width: 100%;
-  padding: 50px 10px 20px 10px;
+  padding: 35px 10px 20px 10px;
   border-radius: 2px;
   margin: 0 auto 15px;
-  gap: 35px;
   background-color: white;
   box-shadow: 0px 4px 14px -12px rgba(0, 0, 0, 0.53);
+}
+
+.breadcrumb {
+  padding-bottom: 45px;
+  margin-left: 30px;
+  letter-spacing: 1px;
+  font-size: 17px;
+}
+
+.purple {
+  color: rgb(77, 10, 209);
+}
+
+.purple:hover {
+  color: rgb(68, 0, 255);
+  transition: 0.2s;
+}
+
+.gray {
+  color: rgb(116, 115, 117);
 }
 
 .section {

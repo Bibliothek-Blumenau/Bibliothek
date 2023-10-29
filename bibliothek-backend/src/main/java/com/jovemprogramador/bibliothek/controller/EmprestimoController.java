@@ -7,7 +7,6 @@ import com.jovemprogramador.bibliothek.repository.EmprestimoRepository;
 import com.jovemprogramador.bibliothek.repository.LivroRepository;
 import com.jovemprogramador.bibliothek.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

@@ -3,40 +3,46 @@
     <app-barra-busca></app-barra-busca>
     <div class="padding-bottom"></div>
     <article class="container" *ngIf="mostrarInformacoes">
-        <div class="arrow"></div>
-        <figure class="placeholder">
-            <img class="foto" [src]="livro?.imagemUrl" />
-        </figure>
-        <section class="section">
-            <div>
-                <h2 class="titulo">{{ livro?.titulo }}</h2>
-                <p class="autor">{{ livro?.autor }}</p>
-                <p class="descricao">{{ livro?.descricao }}</p>
-            </div>
-            <div class="info-container">
-                <div class="info">
-                    <h3 class="info-header">Quantidade Disponível</h3>
-                    <p class="info-detalhes">{{ livro?.quantidade }}</p>
+        <nav class="breadcrumb">
+            <a class="purple" routerLink="/sistema">Home</a> <span class="gray"> / </span>
+            <a class="purple" routerLink="/sistema/livros">Livros</a> <span class="gray"> / </span>
+            <span>{{ livro?.titulo }}</span>
+        </nav>
+        <div class="flex">
+            <figure class="placeholder">
+                <img class="foto" [src]="livro?.imagemUrl" />
+            </figure>
+            <section class="section">
+                <div>
+                    <h2 class="titulo">{{ livro?.titulo }}</h2>
+                    <p class="autor">{{ livro?.autor }}</p>
+                    <p class="descricao">{{ livro?.descricao }}</p>
                 </div>
-                <div class="info">
-                    <h3 class="info-header">Editora</h3>
-                    <p class="info-detalhes">{{ livro?.editora }}</p>
+                <div class="info-container">
+                    <div class="info">
+                        <h3 class="info-header">Quantidade Disponível</h3>
+                        <p class="info-detalhes">{{ livro?.quantidade }}</p>
+                    </div>
+                    <div class="info">
+                        <h3 class="info-header">Editora</h3>
+                        <p class="info-detalhes">{{ livro?.editora }}</p>
+                    </div>
+                    <div class="info">
+                        <h3 class="info-header">Gênero</h3>
+                        <p class="info-detalhes">{{ livro?.genero }}</p>
+                    </div>
                 </div>
-                <div class="info">
-                    <h3 class="info-header">Gênero</h3>
-                    <p class="info-detalhes">{{ livro?.genero }}</p>
+                <div class="div-button">
+                    <button class="button" (click)="agendarEmprestimo(livro!.codLivro, matricula!)">Agendar
+                        Empréstimo</button>
+                    <button class="button" *ngIf="isAdmin()" (click)="mostrarEditarLivro()">Editar Livro</button>
+                    <button class="button" *ngIf="isAdmin()" (click)="apagarLivro()">Apagar Livro</button>
                 </div>
-            </div>
-            <div class="div-button">
-                <button class="button" (click)="agendarEmprestimo(livro!.codLivro, matricula!)">Agendar
-                    Empréstimo</button>
-                <button class="button" *ngIf="isAdmin()" (click)="mostrarEditarLivro()">Editar Livro</button>
-                <button class="button" *ngIf="isAdmin()" (click)="apagarLivro()">Apagar Livro</button>
-            </div>
-            <div class="message" [class.sucesso]="messageSuccess" [class.erro]="messageError">
-                <h3>{{ message }}</h3>
-            </div>
-        </section>
+                <div class="message" [class.sucesso]="messageSuccess" [class.erro]="messageError">
+                    <h3>{{ message }}</h3>
+                </div>
+            </section>
+        </div>
     </article>
     <article class="container-editar" *ngIf="mostrarEditar">
         <h2 class="titulo">Editar: {{ livro!.titulo }}</h2>
@@ -90,5 +96,6 @@
             <h3>{{ message }}</h3>
         </div>
     </article>
+    <app-recomendacoes [livroAtual]="livroAtual"></app-recomendacoes>
 </main>
 <app-footer></app-footer>

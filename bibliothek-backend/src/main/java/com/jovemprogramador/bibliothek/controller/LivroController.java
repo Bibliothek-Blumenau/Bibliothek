@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -60,7 +59,7 @@ public class LivroController {
     public List<Livro> getLivrosEmDestaque() {
         List<Livro> livrosEmDestaque = livroRepository.findByDestaqueIsTrue();
         if (livrosEmDestaque.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No highlighted books found.");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Nenhum livro em destaque encontrado.");
         }
         return livrosEmDestaque;
     }
@@ -86,5 +85,11 @@ public class LivroController {
         }
 
         return ResponseEntity.badRequest().build();
+    }
+    @GetMapping("/recomendacoes")
+    public ResponseEntity<List<Livro>> buscarLivrosRecomendadosPorGenero(
+            @RequestParam(name = "genero") String genero) {
+        List<Livro> recomendacoes = livroRepository.findAllByGeneroLike(genero);
+        return ResponseEntity.ok(recomendacoes);
     }
 }

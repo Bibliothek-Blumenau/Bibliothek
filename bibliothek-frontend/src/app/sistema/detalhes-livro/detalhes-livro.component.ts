@@ -13,6 +13,7 @@ import { EmprestimoService } from 'src/app/emprestimo.service';
 })
 export class DetalhesLivroComponent implements OnInit {
   livro: Livro | null = null;
+  livroAtual: Livro | null = null;
   matricula: string | null = localStorage.getItem('matricula');
   mostrarInformacoes: boolean = true;
   mostrarEditar: boolean = false;
@@ -41,6 +42,7 @@ export class DetalhesLivroComponent implements OnInit {
       )
       .subscribe((livro) => {
         this.livro = livro;
+        this.livroAtual = livro;
       });
   }
 

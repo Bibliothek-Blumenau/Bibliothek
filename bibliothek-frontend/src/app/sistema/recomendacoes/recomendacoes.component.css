@@ -1,0 +1,113 @@
+.container {
+  max-width: 1400px;
+  margin: auto;
+  padding: 10px;
+  padding-top: 35px;
+  padding-bottom: 25px;
+}
+
+h2 {
+  margin-top: 30px;
+  font-size: 25px;
+}
+
+a {
+  color: black;
+}
+
+.lista-livros {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.lista-livro-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  padding: 0 18px 0 9px;
+  padding-right: 18px;
+  color: rgb(129, 129, 129);
+}
+
+.header-titulo {
+  width: 325px;
+  text-align: center;
+}
+
+.header-editora {
+  width: 100px;
+  text-align: center;
+}
+
+.header-genero {
+  width: 100px;
+  text-align: center;
+}
+
+.header-detalhes {
+  width: 150px;
+  text-align: center;
+}
+
+.lista-livro-link {
+  width: 100%;
+  background-color: white;
+  display: flex;
+  box-shadow: 0px 4px 14px -12px rgba(0, 0, 0, 0.53);
+  padding: 9px;
+  padding-right: 18px;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+}
+
+.img-titulo {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  width: 325px;
+}
+
+.lista-livro-link:hover {
+  transition: all 0.3s ease;
+  box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.lista-livro-img {
+  width: 60px;
+  height: 85px;
+  border-style: solid;
+  border-width: 0.2px;
+  border-color: #cecece;
+}
+
+.lista-livro-titulo {
+  margin-bottom: 2px;
+}
+
+.lista-livro-editora {
+  width: 100px;
+  text-align: center;
+}
+
+.lista-livro-genero {
+  width: 100px;
+  text-align: center;
+}
+
+.mais-detalhes {
+  font-size: 14px;
+  padding: 14px 30px;
+  border: none;
+  background: rgb(89 32 201);
+  color: white;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.mais-detalhes:hover {
+  background: rgb(74, 27, 167);
+  transition: 0.2s;
+}

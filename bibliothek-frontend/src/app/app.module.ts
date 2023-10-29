@@ -22,6 +22,7 @@ import { CadastrarUsuarioComponent } from './sistema/cadastrar-usuario/cadastrar
 import { PerfilUsuarioComponent } from './sistema/perfil-usuario/perfil-usuario.component';
 import { DatePipe } from '@angular/common';
 import { EmprestimosComponent } from './sistema/emprestimos/emprestimos.component';
+import { RecomendacoesComponent } from './sistema/recomendacoes/recomendacoes.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { EmprestimosComponent } from './sistema/emprestimos/emprestimos.componen
     CadastrarUsuarioComponent,
     PerfilUsuarioComponent,
     EmprestimosComponent,
+    RecomendacoesComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [DatePipe],
