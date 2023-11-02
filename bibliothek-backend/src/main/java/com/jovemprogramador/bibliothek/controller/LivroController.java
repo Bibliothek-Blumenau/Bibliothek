@@ -39,6 +39,7 @@ public class LivroController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public void create(@RequestBody @Valid Livro livro) {
+        livro.setDisponibilidade(livro.getEstoque());
         livroRepository.save(livro);
     }
 
@@ -47,6 +48,21 @@ public class LivroController {
         if (!livroRepository.existsById(codLivro)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Livro não encontrado.");
         }
+
+        Livro livroAtual = livroRepository.findById(codLivro);
+
+        int estoqueAnterior = livroAtual.getEstoque();
+        int estoqueNovo = livro.getEstoque();
+        int disponibilidadeAtual = livroAtual.getDisponibilidade();
+
+        if (estoqueNovo != estoqueAnterior) {
+            int diferencaEstoque = estoqueNovo - estoqueAnterior;
+            int novaDisponibilidade = disponibilidadeAtual + diferencaEstoque;
+            livro.setDisponibilidade(novaDisponibilidade);
+        } else {
+            livro.setDisponibilidade(disponibilidadeAtual);
+        }
+
         livroRepository.save(livro);
     }
 

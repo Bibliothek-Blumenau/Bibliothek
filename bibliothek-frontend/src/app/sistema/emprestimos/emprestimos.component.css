@@ -12,7 +12,7 @@ main {
 .container {
   display: flex;
   flex-direction: column;
-  max-width: 1200px;
+  max-width: 1300px;
   padding: 50px 70px 20px 70px;
   border-radius: 2px;
   margin: 0 auto 15px;
@@ -21,65 +21,18 @@ main {
   box-shadow: 0px 4px 14px -12px rgba(0, 0, 0, 0.53);
 }
 
-.profile-div {
-  padding-top: 10px;
-  align-self: center;
-}
-
 .titulo {
   align-self: center;
   margin-bottom: 25px;
 }
 
-.profile-pic {
-  width: 170px;
-  height: 170px;
-  border-radius: 100%;
-  padding: 4px;
-  background-color: #333333;
-  object-fit: cover;
-  align-self: center;
-}
-
-.info-2 {
-  margin-top: 20px;
-  margin-bottom: 25px;
-}
 .info-header {
   margin-bottom: 10px;
+  font-size: 28px;
 }
 
 .info-agendados {
   margin-bottom: 5px;
-}
-
-fieldset {
-  display: flex;
-  flex-direction: column;
-  border: none;
-  margin: 0 0 25px;
-  min-width: 100%;
-  padding: 0;
-  width: 100%;
-}
-
-label {
-  font-size: 18px;
-}
-
-input {
-  height: 40px;
-  border: 1px solid #ccc;
-  background: #fff;
-  margin: 10px 0 5px;
-  padding: 10px;
-  border-radius: 4px;
-  font-size: 17px;
-  outline: 0;
-}
-
-.input-senha {
-  width: 240px;
 }
 
 .button-div {
@@ -89,12 +42,13 @@ input {
 button {
   font-size: 14px;
   padding: 14px 0px;
-  width: 150px;
+  width: 130px;
   border: none;
   background: rgb(0, 0, 0);
   color: white;
   border-radius: 2px;
   cursor: pointer;
+  margin: 0 20px;
 }
 
 button:disabled,
@@ -126,8 +80,8 @@ a {
   justify-content: space-between;
   align-items: center;
   font-size: 14px;
-  padding: 0 18px 0 9px;
-  padding-right: 18px;
+  padding: 0 9px;
+  padding-right: 9px;
   color: rgb(129, 129, 129);
 }
 
@@ -136,19 +90,15 @@ a {
   text-align: center;
 }
 
-.header-editora {
-  width: 100px;
-  text-align: center;
-}
-
-.header-genero {
+.header-info {
   width: 100px;
   text-align: center;
 }
 
 .header-detalhes {
-  width: 150px;
+  width: 130px;
   text-align: center;
+  margin: 0 20px;
 }
 
 .lista-livro-link {
@@ -157,7 +107,7 @@ a {
   display: flex;
   box-shadow: 0px 4px 14px -12px rgba(0, 0, 0, 0.53);
   padding: 9px;
-  padding-right: 18px;
+  padding-right: 9px;
   justify-content: space-between;
   align-items: center;
   font-size: 15px;
@@ -182,22 +132,9 @@ a {
   margin-bottom: 2px;
 }
 
-.lista-livro-editora {
+.lista-livro-info {
   width: 100px;
   text-align: center;
-}
-
-.lista-livro-genero {
-  width: 100px;
-  text-align: center;
-}
-
-.mais-detalhes {
-  padding: 0 38px;
-}
-
-.message {
-  margin-bottom: 15px;
 }
 
 .sucesso {

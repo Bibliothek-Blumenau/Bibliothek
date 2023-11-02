@@ -19,9 +19,13 @@
                     <p class="descricao">{{ livro?.descricao }}</p>
                 </div>
                 <div class="info-container">
+                    <div class="info" *ngIf="isAdmin()">
+                        <h3 class="info-header">Quantidade em Estoque</h3>
+                        <p class="info-detalhes">{{ livro?.estoque }}</p>
+                    </div>
                     <div class="info">
                         <h3 class="info-header">Quantidade Disponível</h3>
-                        <p class="info-detalhes">{{ livro?.quantidade }}</p>
+                        <p class="info-detalhes">{{ livro?.disponibilidade }}</p>
                     </div>
                     <div class="info">
                         <h3 class="info-header">Editora</h3>
@@ -69,8 +73,8 @@
             </fieldset>
             <fieldset>
                 <label for="quantidade">Quantidade em Estoque</label>
-                <input placeholder="{{livro!.quantidade}}" type="number" min="0" name="quantidade" id="quantidade"
-                    required [(ngModel)]="livro!.quantidade">
+                <input placeholder="{{livro!.estoque}}" type="number" min="0" name="quantidade" id="quantidade" required
+                    [(ngModel)]="livro!.estoque">
             </fieldset>
             <fieldset>
                 <label for="imagemUrl">Imagem do Livro</label>

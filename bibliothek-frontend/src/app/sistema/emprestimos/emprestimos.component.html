@@ -8,10 +8,12 @@
                 <div class="lista-livros container2" id="anchor">
                     <div class="lista-livro-header">
                         <p class="header-titulo">Título</p>
-                        <p class="header-editora">Nome do Usuário</p>
-                        <p class="header-editora">Data do Empréstimo</p>
-                        <p class="header-genero">Data limite</p>
-                        <p class="header-detalhes">Situação</p>
+                        <p class="header-info">Nome do Usuário</p>
+                        <p class="header-info">Data da requisição</p>
+                        <p class="header-info">Data do empréstimo</p>
+                        <p class="header-info">Data limite</p>
+                        <p class="header-info">Multa</p>
+                        <p class="header-info">Situação</p>
                         <p class="header-detalhes">Gerenciar Empréstimos</p>
                     </div>
                     <a class="lista-livro-link" *ngFor="let emprestimo of emprestimos">
@@ -23,10 +25,12 @@
                                 <p class="lista-livro-autor">{{ emprestimo.livro.autor }}</p>
                             </div>
                         </div>
-                        <p class="lista-livro-editora">{{ emprestimo.usuario.nomeCompleto }}</p>
-                        <p class="lista-livro-editora">{{ emprestimo.dataEmprestimo | date:'dd/MM/yyyy' }}</p>
-                        <p class="lista-livro-genero">{{ emprestimo.dataEntrega | date:'dd/MM/yyyy' }}</p>
-                        <p class="mais-detalhes">{{ emprestimo.status }}</p>
+                        <p class="lista-livro-info">{{ emprestimo.usuario.nomeCompleto }}</p>
+                        <p class="lista-livro-info">{{ emprestimo.dataRequisicao | date:'dd/MM/yyyy' }}</p>
+                        <p class="lista-livro-info">{{ emprestimo.dataEmprestimo | date:'dd/MM/yyyy' }}</p>
+                        <p class="lista-livro-info">{{ emprestimo.dataEntrega | date:'dd/MM/yyyy' }}</p>
+                        <p class="lista-livro-info">R$ {{ emprestimo.multa }}</p>
+                        <p class="lista-livro-info">{{ emprestimo.status }}</p>
                         <button *ngIf="emprestimo.status === 'Pendente'"
                             (click)="aprovarEmprestimo(emprestimo.codEmprestimo)">Aprovar</button>
 

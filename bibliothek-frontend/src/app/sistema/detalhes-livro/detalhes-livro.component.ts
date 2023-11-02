@@ -62,7 +62,7 @@ export class DetalhesLivroComponent implements OnInit {
         this.messageError = false;
         this.message = 'Livro agendado com sucesso!';
         if (this.livro) {
-          this.livro.quantidade = this.livro.quantidade - 1;
+          this.livro.disponibilidade = this.livro.disponibilidade - 1;
         }
       },
       (error) => {
@@ -89,6 +89,7 @@ export class DetalhesLivroComponent implements OnInit {
     if (this.livro) {
       this.livroApiService.editarLivro(this.livro).subscribe(
         (response) => {
+          this.ngOnInit();
           this.mostrarInformacoes = true;
           this.mostrarEditar = false;
           this.messageSuccess = true;

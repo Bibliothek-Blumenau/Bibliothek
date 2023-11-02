@@ -50,7 +50,6 @@ export class EmprestimosComponent {
   finalizarEmprestimo(codEmprestimo: number) {
     this.emprestimoService.finalizarEmprestimo(codEmprestimo).subscribe(
       (response) => {
-        // Atualize a lista de empréstimos após a finalização
         this.carregarEmprestimos();
       },
       (error) => {

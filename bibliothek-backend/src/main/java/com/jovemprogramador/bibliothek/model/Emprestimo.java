@@ -24,10 +24,13 @@ public class Emprestimo {
     private String status;
 
     @Column(columnDefinition = "DATE")
-    private LocalDateTime dataEmprestimo; //LocalDateTime.now();
+    private LocalDateTime dataRequisicao;
 
     @Column(columnDefinition = "DATE")
-    private LocalDateTime dataEntrega; //dataEmprestimo.plus(Duration.ofDays(14));
+    private LocalDateTime dataEmprestimo;
+
+    @Column(columnDefinition = "DATE")
+    private LocalDateTime dataEntrega;
 
     private BigDecimal multa;
 
@@ -60,6 +63,10 @@ public class Emprestimo {
         return this.status;
     }
 
+    public LocalDateTime getDataRequisicao() {
+        return this.dataRequisicao;
+    }
+
     public LocalDateTime getDataEmprestimo() {
         return this.dataEmprestimo;
     }
@@ -88,6 +95,10 @@ public class Emprestimo {
         this.status = status;
     }
 
+    public void setDataRequisicao(LocalDateTime dataRequisicao) {
+        this.dataRequisicao = dataRequisicao;
+    }
+
     public void setDataEmprestimo(LocalDateTime dataEmprestimo) {
         this.dataEmprestimo = dataEmprestimo;
     }
@@ -100,18 +111,5 @@ public class Emprestimo {
         this.multa = multa;
     }
 
-/*
-    public BigDecimal calcularMulta() {
-        LocalDateTime dataAtual = LocalDateTime.now();
 
-        if (dataAtual.isAfter(dataEntrega)) {
-            long diasAtraso = Duration.between(dataEntrega, dataAtual).toDays();
-            BigDecimal multaPorDia = new BigDecimal("0.15");
-            multa = multaPorDia.multiply(BigDecimal.valueOf(diasAtraso));
-        } else {
-            multa = BigDecimal.ZERO;
-        }
-
-        return multa;
-    } */
 }

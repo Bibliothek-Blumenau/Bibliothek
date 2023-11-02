@@ -7,10 +7,12 @@ import com.jovemprogramador.bibliothek.repository.EmprestimoRepository;
 import com.jovemprogramador.bibliothek.repository.LivroRepository;
 import com.jovemprogramador.bibliothek.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -28,8 +30,10 @@ public class EmprestimoController {
     private UserRepository userRepository;
 
     @GetMapping
-    public ResponseEntity<List<Emprestimo> > getTodosEmprestimos() {
-        List<Emprestimo> emprestimos = emprestimoRepository.findAll();
+    public ResponseEntity<List<Emprestimo>> getTodosEmprestimos() {
+        Sort sort = Sort.by(Sort.Order.desc("codEmprestimo"));
+
+        List<Emprestimo> emprestimos = emprestimoRepository.findAll(sort);
 
         return ResponseEntity.ok(emprestimos);
     }
@@ -39,7 +43,9 @@ public class EmprestimoController {
         User usuario = userRepository.findById(matricula)
                 .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado"));
 
-        List<Emprestimo> emprestimos = emprestimoRepository.findByUsuario(usuario);
+        Sort sort = Sort.by(Sort.Order.desc("codEmprestimo"));
+
+        List<Emprestimo> emprestimos = emprestimoRepository.findByUsuario(usuario, sort);
 
         return ResponseEntity.ok(emprestimos);
     }
@@ -48,7 +54,7 @@ public class EmprestimoController {
     public ResponseEntity<String> solicitarLivro(@PathVariable long codLivro, @PathVariable String matricula) {
         Livro livro = livroRepository.findById(codLivro);
 
-        if (livro.getQuantidade() <= 0) {
+        if (livro.getDisponibilidade() <= 0) {
             return ResponseEntity.badRequest().body("Livro não disponível para empréstimo");
         }
 
@@ -58,8 +64,10 @@ public class EmprestimoController {
         emprestimo.setLivro(livro);
         emprestimo.setUsuario(usuario);
         emprestimo.setStatus("Pendente");
+        emprestimo.setDataRequisicao(LocalDateTime.now());
+        emprestimo.setMulta(BigDecimal.valueOf(0));
 
-        livro.setQuantidade(livro.getQuantidade() - 1);
+        livro.setDisponibilidade(livro.getDisponibilidade() - 1);
         livroRepository.save(livro);
 
         emprestimoRepository.save(emprestimo);
@@ -78,7 +86,6 @@ public class EmprestimoController {
 
         emprestimo.setDataEmprestimo(LocalDateTime.now());
         emprestimo.setDataEntrega(emprestimo.getDataEmprestimo().plusDays(14));
-        emprestimo.setMulta(BigDecimal.valueOf(0));
         emprestimo.setStatus("Emprestado");
 
         emprestimoRepository.save(emprestimo);
@@ -96,8 +103,17 @@ public class EmprestimoController {
         }
 
         Livro livro = emprestimo.getLivro();
-        livro.setQuantidade(livro.getQuantidade() + 1);
+        livro.setDisponibilidade(livro.getDisponibilidade() + 1);
         livroRepository.save(livro);
+
+        LocalDateTime dataAtual = LocalDateTime.now();
+        if (dataAtual.isAfter(emprestimo.getDataEntrega())) {
+            long diasAtraso = Duration.between(emprestimo.getDataEntrega(), dataAtual).toDays();
+            BigDecimal multaPorDia = new BigDecimal("0.15");
+            emprestimo.setMulta(multaPorDia.multiply(BigDecimal.valueOf(diasAtraso)));
+        } else {
+            emprestimo.setMulta(BigDecimal.ZERO);
+        }
 
         emprestimo.setMulta(BigDecimal.valueOf(0));
         emprestimo.setStatus("Finalizado");

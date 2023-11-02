@@ -12,7 +12,7 @@ main {
 .container {
   display: flex;
   flex-direction: column;
-  max-width: 1000px;
+  max-width: 1100px;
   padding: 50px 70px 20px 70px;
   border-radius: 2px;
   margin: 0 auto 15px;
@@ -41,10 +41,6 @@ main {
   align-self: center;
 }
 
-.info-2 {
-  margin-top: 20px;
-  margin-bottom: 25px;
-}
 .info-header {
   margin-bottom: 10px;
 }
@@ -130,12 +126,7 @@ a {
   text-align: center;
 }
 
-.header-editora {
-  width: 100px;
-  text-align: center;
-}
-
-.header-genero {
+.header-info {
   width: 100px;
   text-align: center;
 }
@@ -181,18 +172,14 @@ a {
   margin-bottom: 2px;
 }
 
-.lista-livro-editora {
-  width: 100px;
-  text-align: center;
-}
-
-.lista-livro-genero {
+.lista-livro-info {
   width: 100px;
   text-align: center;
 }
 
 .mais-detalhes {
-  padding: 0 36px;
+  width: 150px;
+  text-align: center;
 }
 
 .message {

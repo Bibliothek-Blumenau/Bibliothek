@@ -4,7 +4,8 @@ export interface Livro {
   genero: string;
   autor: string;
   editora: string;
-  quantidade: number;
+  estoque: number;
+  disponibilidade: number;
   imagemUrl: string;
   destaque: boolean;
   descricao: string;

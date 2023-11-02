@@ -21,7 +21,9 @@ public class Livro {
     @NotEmpty
     private String editora;
     @NotNull
-    private int quantidade;
+    private int estoque;
+    @NotNull
+    private int disponibilidade;
     @NotEmpty
     private String imagemUrl;
     private boolean destaque;
@@ -29,13 +31,15 @@ public class Livro {
     @NotEmpty
     private String descricao;
 
-    public Livro(long codLivro, @NotEmpty String titulo, @NotEmpty String genero, @NotEmpty String autor, @NotEmpty String editora, @NotNull int quantidade, @NotEmpty String imagemUrl, boolean destaque, @NotEmpty String descricao) {
+
+    public Livro(long codLivro, @NotEmpty String titulo, @NotEmpty String genero, @NotEmpty String autor, @NotEmpty String editora, @NotNull int estoque, @NotNull int disponibilidade, @NotEmpty String imagemUrl, boolean destaque, @NotEmpty String descricao) {
         this.codLivro = codLivro;
         this.titulo = titulo;
         this.genero = genero;
         this.autor = autor;
         this.editora = editora;
-        this.quantidade = quantidade;
+        this.estoque = estoque;
+        this.disponibilidade = disponibilidade;
         this.imagemUrl = imagemUrl;
         this.destaque = destaque;
         this.descricao = descricao;
@@ -64,8 +68,12 @@ public class Livro {
         return this.editora;
     }
 
-    public @NotNull int getQuantidade() {
-        return this.quantidade;
+    public @NotNull int getEstoque() {
+        return this.estoque;
+    }
+
+    public @NotNull int getDisponibilidade() {
+        return this.disponibilidade;
     }
 
     public @NotEmpty String getImagemUrl() {
@@ -100,8 +108,12 @@ public class Livro {
         this.editora = editora;
     }
 
-    public void setQuantidade(@NotNull int quantidade) {
-        this.quantidade = quantidade;
+    public void setEstoque(@NotNull int estoque) {
+        this.estoque = estoque;
+    }
+
+    public void setDisponibilidade(@NotNull int disponibilidade) {
+        this.disponibilidade = disponibilidade;
     }
 
     public void setImagemUrl(@NotEmpty String imagemUrl) {
