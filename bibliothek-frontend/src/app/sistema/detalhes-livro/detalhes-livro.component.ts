@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LivroApiService } from '../../livro-api.service';
-import { of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { filter, map, switchMap } from 'rxjs/operators';
 import { Livro } from 'src/app/livro';
 import { EmprestimoService } from 'src/app/emprestimo.service';
 
@@ -20,6 +20,7 @@ export class DetalhesLivroComponent implements OnInit {
   message: string = '';
   messageSuccess: boolean = false;
   messageError: boolean = false;
+  isButtonDisabled: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -43,6 +44,7 @@ export class DetalhesLivroComponent implements OnInit {
       .subscribe((livro) => {
         this.livro = livro;
         this.livroAtual = livro;
+        this.verificaEmprestimo();
       });
   }
 
@@ -63,12 +65,33 @@ export class DetalhesLivroComponent implements OnInit {
         this.message = 'Livro agendado com sucesso!';
         if (this.livro) {
           this.livro.disponibilidade = this.livro.disponibilidade - 1;
+          this.isButtonDisabled = true;
         }
       },
       (error) => {
         this.messageSuccess = false;
         this.messageError = true;
         this.message = 'Erro ao agendar livro.';
+        console.error(error);
+      }
+    );
+  }
+
+  verificaEmprestimo() {
+    this.emprestimoService.getEmprestimosUsuario(this.matricula!).subscribe(
+      (emprestimos) => {
+        for (let emprestimo of emprestimos) {
+          if (
+            emprestimo.livro.codLivro === this.livro?.codLivro &&
+            !(emprestimo.status === 'Finalizado')
+          ) {
+            this.isButtonDisabled = true;
+            return;
+          }
+        }
+        this.isButtonDisabled = false;
+      },
+      (error) => {
         console.error(error);
       }
     );

@@ -57,4 +57,15 @@ export class EmprestimosComponent {
       }
     );
   }
+
+  renovarEmprestimo(codEmprestimo: number) {
+    this.emprestimoService.renovarEmprestimo(codEmprestimo).subscribe(
+      (response) => {
+        this.carregarEmprestimos();
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
 }

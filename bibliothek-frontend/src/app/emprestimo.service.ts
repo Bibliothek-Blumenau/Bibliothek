@@ -55,4 +55,13 @@ export class EmprestimoService {
       { headers }
     );
   }
+
+  renovarEmprestimo(codEmprestimo: number): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.http.put<any>(
+      `${this.apiUrl}/emprestimo/${codEmprestimo}`,
+      null,
+      { headers }
+    );
+  }
 }

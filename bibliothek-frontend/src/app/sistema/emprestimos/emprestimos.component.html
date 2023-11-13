@@ -15,6 +15,7 @@
                         <p class="header-info">Multa</p>
                         <p class="header-info">Situação</p>
                         <p class="header-detalhes">Gerenciar Empréstimos</p>
+                        <p class="header-detalhes">Renovar Empréstimos</p>
                     </div>
                     <a class="lista-livro-link" *ngFor="let emprestimo of emprestimos">
                         <div class="img-titulo">
@@ -29,14 +30,21 @@
                         <p class="lista-livro-info">{{ emprestimo.dataRequisicao | date:'dd/MM/yyyy' }}</p>
                         <p class="lista-livro-info">{{ emprestimo.dataEmprestimo | date:'dd/MM/yyyy' }}</p>
                         <p class="lista-livro-info">{{ emprestimo.dataEntrega | date:'dd/MM/yyyy' }}</p>
-                        <p class="lista-livro-info">R$ {{ emprestimo.multa }}</p>
+                        <p class="lista-livro-info">R$ {{ emprestimo.multa }}.00</p>
                         <p class="lista-livro-info">{{ emprestimo.status }}</p>
                         <button *ngIf="emprestimo.status === 'Pendente'"
                             (click)="aprovarEmprestimo(emprestimo.codEmprestimo)">Aprovar</button>
-
+                        <button *ngIf="emprestimo.status === 'Pendente'" disabled>Renovar</button>
                         <button *ngIf="emprestimo.status === 'Emprestado'"
                             (click)="finalizarEmprestimo(emprestimo.codEmprestimo)">Finalizar</button>
                         <button *ngIf="emprestimo.status === 'Finalizado'" disabled>Finalizado</button>
+                        <button *ngIf="emprestimo.status === 'Finalizado'"
+                            (click)="renovarEmprestimo(emprestimo.codEmprestimo)" disabled>Renovar</button>
+                        <button *ngIf="emprestimo.status === 'Renovado'"
+                            (click)="finalizarEmprestimo(emprestimo.codEmprestimo)">Finalizar</button>
+                        <button *ngIf="emprestimo.status === 'Emprestado'"
+                            (click)="renovarEmprestimo(emprestimo.codEmprestimo)">Renovar</button>
+                        <button *ngIf="emprestimo.status === 'Renovado'" disabled>Renovar</button>
                     </a>
                 </div>
                 <div class="message" [class.sucesso]="messageSuccess" [class.erro]="messageError">

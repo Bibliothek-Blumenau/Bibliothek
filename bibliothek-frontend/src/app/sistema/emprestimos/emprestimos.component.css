@@ -12,7 +12,7 @@ main {
 .container {
   display: flex;
   flex-direction: column;
-  max-width: 1300px;
+  max-width: 1550px;
   padding: 50px 70px 20px 70px;
   border-radius: 2px;
   margin: 0 auto 15px;

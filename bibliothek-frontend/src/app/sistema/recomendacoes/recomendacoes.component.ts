@@ -9,7 +9,7 @@ import { LivroApiService } from 'src/app/livro-api.service';
   styleUrls: ['./recomendacoes.component.css'],
 })
 export class RecomendacoesComponent implements OnInit {
-  @Input() livroAtual: Livro | null = null; // Atributo de entrada para o livro atual
+  @Input() livroAtual: Livro | null = null;
 
   recomendacoes: Livro[] = [];
   recomendacoesLimitadas: Livro[] = [];

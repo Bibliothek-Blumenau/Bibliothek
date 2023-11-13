@@ -98,7 +98,7 @@ public class EmprestimoController {
         Emprestimo emprestimo = emprestimoRepository.findById(codEmprestimo)
                 .orElseThrow(() -> new IllegalArgumentException("Empréstimo não encontrado"));
 
-        if (!emprestimo.getStatus().equals("Emprestado")) {
+        if (emprestimo.getStatus().isBlank()) {
             return ResponseEntity.badRequest().body("Este empréstimo não está em andamento.");
         }
 
@@ -109,14 +109,30 @@ public class EmprestimoController {
         LocalDateTime dataAtual = LocalDateTime.now();
         if (dataAtual.isAfter(emprestimo.getDataEntrega())) {
             long diasAtraso = Duration.between(emprestimo.getDataEntrega(), dataAtual).toDays();
-            BigDecimal multaPorDia = new BigDecimal("0.15");
-            emprestimo.setMulta(multaPorDia.multiply(BigDecimal.valueOf(diasAtraso)));
+            BigDecimal multaPorDia = new BigDecimal("1");
+            emprestimo.setMulta((multaPorDia.multiply(BigDecimal.valueOf(diasAtraso))));
         } else {
             emprestimo.setMulta(BigDecimal.ZERO);
         }
 
-        emprestimo.setMulta(BigDecimal.valueOf(0));
         emprestimo.setStatus("Finalizado");
+        emprestimoRepository.save(emprestimo);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/emprestimo/{codEmprestimo}")  //Working
+    public ResponseEntity<String> renovarEmprestimo(@PathVariable long codEmprestimo) {
+        Emprestimo emprestimo = emprestimoRepository.findById(codEmprestimo)
+                .orElseThrow(() -> new IllegalArgumentException("Empréstimo não encontrado"));
+
+        if (emprestimo.getStatus().equals("Pendente")) {
+            return ResponseEntity.badRequest().body("Este empréstimo não está pendente.");
+        }else if(emprestimo.getStatus().equals("Finalizado")) {
+            return ResponseEntity.badRequest().body("Este empréstimo está Finalizado.");
+        }
+        emprestimo.setDataEntrega(emprestimo.getDataEntrega().plusDays(7));
+        emprestimo.setStatus("Renovado");
         emprestimoRepository.save(emprestimo);
 
         return ResponseEntity.ok().build();
