@@ -16,7 +16,7 @@ export class AdminAuthGuard {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
-    if (this.authService.isAdmin()) {
+    if (!this.authService.isAdmin() || this.authService.isRenovacoesAllowed()) {
       return true;
     } else {
       this.router.navigate(['/sistema']);

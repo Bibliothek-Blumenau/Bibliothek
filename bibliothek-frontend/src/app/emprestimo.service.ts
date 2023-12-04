@@ -56,12 +56,21 @@ export class EmprestimoService {
     );
   }
 
-  renovarEmprestimo(codEmprestimo: number): Observable<any> {
-    const headers = this.getAuthHeaders();
+  renovarEmprestimo(codEmprestimo: number): Observable<any>{
+  const headers = this.getAuthHeaders();
     return this.http.put<any>(
       `${this.apiUrl}/emprestimo/${codEmprestimo}`,
       null,
       { headers }
     );
   }
+
+  solicitarEmprestimo(codEmprestimo: number): Observable<any>{
+  const headers = this.getAuthHeaders();
+    return this.http.post<any>(
+      `${this.apiUrl}/user/solicitar/${codEmprestimo}`, null,
+      { headers }
+    );
+  }
+
 }

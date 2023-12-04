@@ -14,7 +14,7 @@ export class EmDestaqueComponent {
 
   ngOnInit(): void {
     this.livroApiService.getLivrosEmDestaque().subscribe((livros) => {
-      this.livrosEmDestaque = livros;
+      this.livrosEmDestaque = livros.filter(livro => !livro.estadoLivro && livro.disponibilidade != 0)
     });
   }
 }

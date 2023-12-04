@@ -24,8 +24,10 @@ public class User implements UserDetails {
     @NotEmpty
     private String roles;
     private String fotoPerfil;
+    private String pathImage;
+    private boolean resetPassword;
 
-    public User(String matricula, String nomeCompleto, String password, String roles, String fotoPerfil) {
+	public User(String matricula, String nomeCompleto, String password, String roles, String fotoPerfil) {
         this.matricula = matricula;
         this.nomeCompleto = nomeCompleto;
         this.password = password;
@@ -88,7 +90,7 @@ public class User implements UserDetails {
     }
 
     public String getFotoPerfil() {
-        return this.fotoPerfil;
+        return fotoPerfil;
     }
 
     public void setMatricula(String matricula) {
@@ -110,4 +112,20 @@ public class User implements UserDetails {
     public void setFotoPerfil(String fotoPerfil) {
         this.fotoPerfil = fotoPerfil;
     }
+    
+	public boolean isResetPassword() {
+		return resetPassword;
+	}
+
+	public void setResetPassword(boolean resetPassword) {
+		this.resetPassword = resetPassword;
+	}
+	
+	public void setImagePath(String pathImage) {
+		this.pathImage = pathImage;
+	}
+	public String getImagePath() {
+		return this.pathImage;
+	}
+	
 }

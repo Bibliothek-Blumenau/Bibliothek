@@ -24,15 +24,15 @@ public class Livro {
     private int estoque;
     @NotNull
     private int disponibilidade;
-    @NotEmpty
     private String imagemUrl;
+    private String imagemLivro;
     private boolean destaque;
     @Column(columnDefinition = "TEXT")
     @NotEmpty
     private String descricao;
+    private boolean estadoLivro = false;
 
-
-    public Livro(long codLivro, @NotEmpty String titulo, @NotEmpty String genero, @NotEmpty String autor, @NotEmpty String editora, @NotNull int estoque, @NotNull int disponibilidade, @NotEmpty String imagemUrl, boolean destaque, @NotEmpty String descricao) {
+	public Livro(long codLivro, @NotEmpty String titulo, @NotEmpty String genero, @NotEmpty String autor, @NotEmpty String editora, @NotNull int estoque, @NotNull int disponibilidade, @NotEmpty String imagemUrl, boolean destaque, @NotEmpty String descricao) {
         this.codLivro = codLivro;
         this.titulo = titulo;
         this.genero = genero;
@@ -76,8 +76,12 @@ public class Livro {
         return this.disponibilidade;
     }
 
-    public @NotEmpty String getImagemUrl() {
+    public String getImagemUrl() {
         return this.imagemUrl;
+    }
+    
+    public String getImagemLivro() {
+        return this.imagemLivro;
     }
 
     public boolean isDestaque() {
@@ -87,6 +91,10 @@ public class Livro {
     public @NotEmpty String getDescricao() {
         return this.descricao;
     }
+    
+    public boolean getEstadoLivro() {
+		return estadoLivro;
+	}
 
     public void setCodLivro(long codLivro) {
         this.codLivro = codLivro;
@@ -116,8 +124,12 @@ public class Livro {
         this.disponibilidade = disponibilidade;
     }
 
-    public void setImagemUrl(@NotEmpty String imagemUrl) {
+    public void setImagemUrl(String imagemUrl) {
         this.imagemUrl = imagemUrl;
+    }
+    
+    public void setImagemLivro(String imagemLivro) {
+        this.imagemLivro = imagemLivro;
     }
 
     public void setDestaque(boolean destaque) {
@@ -126,5 +138,9 @@ public class Livro {
 
     public void setDescricao(@NotEmpty String descricao) {
         this.descricao = descricao;
+    }
+    
+    public void isLivroUnactive(boolean estadoLivro) {
+    	this.estadoLivro = estadoLivro;
     }
 }

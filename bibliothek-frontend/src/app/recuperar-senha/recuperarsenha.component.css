@@ -1,0 +1,105 @@
+main {
+  background-color: #f1f1f5;
+  font-family: "Space Grotesk", sans-serif;
+  padding: 15px;
+}
+
+.imagem-lateral {
+  border-radius: 25px 0 0 25px;
+  background-image: url(../../assets/img-login.jpg);
+  background-size: cover;
+  width: 502px;
+  height: 641px;
+}
+
+svg {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.arrow {
+  position: absolute;
+  margin-top: 30px;
+  margin-left: 30px;
+}
+
+.logo {
+  padding-top: 110px;
+  padding-bottom: 30px;
+}
+
+.heading-recuperarsenha {
+  font-size: 22px;
+  padding-bottom: 10px;
+}
+
+.informacoes {
+  background-color: #ffffff;
+  height: 641px;
+  width: 560px;
+  border-radius: 0 25px 25px 0;
+}
+
+.informacoes-box {
+  padding-left: 100px;
+  padding-right: 20px;
+}
+
+.container-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+fieldset {
+  border: medium none;
+  margin: 0 0 10px;
+  min-width: 100%;
+  padding: 0;
+  width: 100%;
+}
+
+input {
+  width: 240px;
+  height: 40px;
+  border: 1px solid #ccc;
+  background: #fff;
+  margin: 0 0 5px;
+  padding: 10px;
+  border-radius: 4px;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+button {
+  cursor: pointer;
+  width: 240px;
+  border: none;
+  background: #000000;
+  color: rgb(255, 255, 255);
+  margin: 15px 0;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 4px;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+a {
+  margin-top: 10px;
+  text-decoration: none;
+  color: black;
+}
+
+@media (max-width: 940px) {
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 10px;
+}
+
+.success-message{
+  color: green;
+  margin-bottom: 10px;
+}

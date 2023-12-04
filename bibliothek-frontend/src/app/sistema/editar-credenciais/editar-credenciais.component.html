@@ -1,0 +1,39 @@
+<main>
+    <app-navbar-sistema></app-navbar-sistema>
+    <div class="padding-bottom"></div>
+    <article class="container">
+        <div class="arrow"></div>
+        <section class="section">
+            <div>
+                <h1 class="titulo">Altere aqui as credenciais do usuário {{ this.nomeCompleto }}</h1>
+            </div>
+            <div class="info-container">
+              <form (ngSubmit)="renovarCredenciais()">
+                <fieldset>
+                  <label for="matricula">Matrícula</label>
+                  <input class="inputOk" placeholder="{{ this.matricula }}" type="text" name="matricula" id="matricula" disabled [(ngModel)]="this.matricula">
+                </fieldset>
+                <fieldset>
+                  <label for="nomeCompleto">Nome Completo</label>
+                  <input class="inputOk" placeholder="{{ this.nomeCompleto }}" type="text" name="nomeCompleto" id="nomeCompleto" disabled [(ngModel)]="this.nomeCompleto">
+                </fieldset>
+                <fieldset>
+                  <label for="password">Senha</label>
+                  <input placeholder="************" type="password" name="password" id="password" required [(ngModel)]="this.password" >
+                </fieldset>
+                <fieldset>
+                  <label for="confirmPassword">Confirme a Senha</label>
+                  <input placeholder="************" type="password" name="confirmPassword" id="confirmPassword" required [(ngModel)]="this.confirmPassword">
+                </fieldset>
+                <fieldset>
+                  <button type="submit" id="cadastrar">Salvar</button>
+                </fieldset>
+              </form>
+                <div class="message" [class.sucesso]="messageSuccess" [class.erro]="messageError">
+                    <h3>{{ message }}</h3>
+                </div>
+            </div>
+        </section>
+    </article>
+</main>
+<app-footer></app-footer>

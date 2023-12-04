@@ -25,15 +25,14 @@
                         tabindex="1" required autofocus>
                 </fieldset>
                 <fieldset>
-                    <input placeholder="***********" type="password" [(ngModel)]="password" name="password" tabindex="2"
-                        required>
+                    <input placeholder="*********" type="password" class="form-control" [(ngModel)]="password" name="password" required>
                 </fieldset>
                 <fieldset>
                     <button type="submit" id="contact-submit">Login</button>
                 </fieldset>
             </form>
             <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
-            <a href="">Esqueceu sua Senha?</a>
+          <a [routerLink]="['/recuperar-senha']">Esqueceu sua Senha?</a>
         </div>
     </div>
 </main>

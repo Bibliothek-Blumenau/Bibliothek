@@ -17,10 +17,19 @@ export class CadastrarUsuarioComponent {
   message: string = '';
   messageSuccess: boolean = false;
   messageError: boolean = false;
+  passwordVisible: boolean = false;
 
   constructor(private authService: AuthService) {}
 
   cadastrarUsuario() {
+    if (!this.usuario.matricula.trim() || this.usuario.matricula.startsWith(' ') || this.usuario.matricula.endsWith(' ') ||
+      !this.usuario.nomeCompleto.trim() || this.usuario.nomeCompleto.startsWith(' ') || this.usuario.nomeCompleto.endsWith(' ') ||
+      !this.usuario.password.trim() || this.usuario.password.startsWith(' ') || this.usuario.password.endsWith(' ')) {
+      this.messageSuccess = false;
+      this.messageError = true;
+      this.message = 'As informações não podem estar vazias e não podem começar ou terminar com espaços em branco.';
+      return;
+    }
     this.authService.registerUser(this.usuario).subscribe(
       (response) => {
         this.clearForm();
@@ -45,5 +54,9 @@ export class CadastrarUsuarioComponent {
       roles: 'ROLE_USER',
     };
     this.message = '';
+  }
+
+  togglePasswordVisibility() {
+    this.passwordVisible = !this.passwordVisible;
   }
 }

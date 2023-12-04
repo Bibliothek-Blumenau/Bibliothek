@@ -33,8 +33,10 @@ public class Emprestimo {
     private LocalDateTime dataEntrega;
 
     private BigDecimal multa;
+    
+    private boolean solicitacaoEmprestimo;
 
-    public Emprestimo(long codEmprestimo, Livro livro, User usuario, String status, LocalDateTime dataEmprestimo, LocalDateTime dataEntrega, BigDecimal multa) {
+	public Emprestimo(long codEmprestimo, Livro livro, User usuario, String status, LocalDateTime dataEmprestimo, LocalDateTime dataEntrega, BigDecimal multa) {
         this.codEmprestimo = codEmprestimo;
         this.livro = livro;
         this.usuario = usuario;
@@ -46,6 +48,14 @@ public class Emprestimo {
 
     public Emprestimo() {
     }
+    
+    public boolean getSolicitacaoEmprestimo() {
+		return solicitacaoEmprestimo;
+	}
+
+	public void setSolicitacaoEmprestimo(boolean solicitacaoEmprestimo) {
+		this.solicitacaoEmprestimo = solicitacaoEmprestimo;
+	}
 
     public long getCodEmprestimo() {
         return this.codEmprestimo;
@@ -110,6 +120,4 @@ public class Emprestimo {
     public void setMulta(BigDecimal multa) {
         this.multa = multa;
     }
-
-
 }

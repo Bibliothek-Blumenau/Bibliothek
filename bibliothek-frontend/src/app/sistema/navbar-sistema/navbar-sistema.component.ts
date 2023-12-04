@@ -49,4 +49,12 @@ export class NavbarSistemaComponent {
     const roles = localStorage.getItem('roles');
     return !!roles && roles.includes('ROLE_ADMIN');
   }
+
+  isUserClient(): boolean {
+    const roles = localStorage.getItem('roles');
+    const isUserClient = roles === 'ROLE_USER';
+    const isAdmin = !!roles && roles.includes('ROLE_ADMIN');
+    return isUserClient && !isAdmin;
+  }
+
 }

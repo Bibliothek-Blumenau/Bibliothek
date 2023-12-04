@@ -15,12 +15,11 @@ public class BibliothekApplication {
 		SpringApplication.run(BibliothekApplication.class, args);
 	}
 
-	/*@Bean
+	@Bean
 	CommandLineRunner commandLineRunner(UserRepository users, PasswordEncoder encoder) {
 		return args -> {
 			users.save(new User("admin","Administrador",encoder.encode("admin"),"ROLE_USER,ROLE_ADMIN", ""));
 		};
 	}
 
-*/
 }

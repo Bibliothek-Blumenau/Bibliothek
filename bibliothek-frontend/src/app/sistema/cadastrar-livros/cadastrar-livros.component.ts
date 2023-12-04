@@ -28,6 +28,14 @@ export class CadastrarLivrosComponent {
   constructor(private livroApiService: LivroApiService) {}
 
   cadastrarLivro() {
+    if (!this.livro.titulo.trim() || this.livro.titulo.startsWith(' ') || this.livro.titulo.endsWith(' ') || this.livro.titulo.length <= 2 ||
+        !this.livro.autor.trim() || this.livro.autor.startsWith(' ') || this.livro.autor.endsWith(' ') || this.livro.autor.length <= 2 ||
+        !this.livro.genero.trim() || this.livro.genero.startsWith(' ') || this.livro.genero.endsWith(' ') || this.livro.genero.length <= 2) {
+      this.message = 'O título, autor e o gênero do livro devem conter duas tês letras ou mais e não podem começar ou terminar com espaços em branco.';
+      this.messageError = true;
+      this.messageSuccess = false;
+      return;
+    }
     this.livroApiService.createLivro(this.livro).subscribe(
       (response) => {
         this.clearForm();

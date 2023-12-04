@@ -8,12 +8,14 @@ import { EmprestimoService } from 'src/app/emprestimo.service';
   templateUrl: './emprestimos.component.html',
   styleUrls: ['./emprestimos.component.css'],
 })
+
 export class EmprestimosComponent {
   message: string = '';
   messageSuccess: boolean = false;
   messageError: boolean = false;
   matricula: string | null = localStorage.getItem('matricula');
   emprestimos: any[] = [];
+  tempSolicitacoes: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -58,14 +60,14 @@ export class EmprestimosComponent {
     );
   }
 
-  renovarEmprestimo(codEmprestimo: number) {
-    this.emprestimoService.renovarEmprestimo(codEmprestimo).subscribe(
-      (response) => {
-        this.carregarEmprestimos();
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
+  renovarEmprestimo(codEmprestimo: number){
+  this.emprestimoService.renovarEmprestimo(codEmprestimo).subscribe(
+     (response) => {
+       this.carregarEmprestimos();
+     },
+     (error) => {
+       console.error(error);
+     }
+   );
   }
 }

@@ -28,7 +28,6 @@ export class BarraBuscaComponent {
 
     this.livroApiService.buscarLivros(this.livroSearch).subscribe((livros) => {
       this.resultadoBuscaService.atualizarResultadosBusca(livros);
-      console.log('Resultados da busca:', livros);
       this.router.navigate(['/sistema/buscarlivros'], {
         queryParams: { busca: this.livroSearch.titulo },
       });

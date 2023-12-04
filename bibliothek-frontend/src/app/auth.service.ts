@@ -57,33 +57,6 @@ export class AuthService {
       );
   }
 
-  atualizarFotoPerfil(novaFotoPerfil: string): Observable<any> {
-    const matricula = localStorage.getItem('matricula');
-    const headers = this.getAuthHeaders();
-
-    return this.http
-      .put(
-        `${this.apiUrl}/user/${matricula}/foto`,
-        { fotoPerfil: novaFotoPerfil },
-        { headers }
-      )
-      .pipe(
-        tap(() => {
-          localStorage.setItem('fotoPerfil', novaFotoPerfil);
-        })
-      );
-  }
-  uploadImageToImgbb(imageData: string): Observable<any> {
-    const formData = new FormData();
-    formData.append('key', 'd0176b7d250adadd6c772429c8ff233b');
-    formData.append('image', imageData);
-
-    const headers = new HttpHeaders();
-
-    return this.http.post('https://api.imgbb.com/1/upload', formData, {
-      headers,
-    });
-  }
 
   atualizarSenha(novaSenha: string): Observable<any> {
     const matricula = localStorage.getItem('matricula');
@@ -113,4 +86,45 @@ export class AuthService {
   navigateToSistema(): void {
     this.router.navigate(['/sistema']);
   }
+
+  esqueciMinhaSenha(matricula: string, nomeCompleto: string){
+  const credentials = { matricula, nomeCompleto};
+  return this.http.post(`${this.apiUrl}/login/esqueciminhasenha`, credentials);
+  }
+
+  listaUsuarioCredenciais(): Observable<any[]> {
+    const headers = this.getAuthHeaders();
+    return this.http.get<any[]>(`${this.apiUrl}/renovar/credentials/list`, { headers });
+  }
+
+  private usuarioSelecionado: any;
+
+  setUsuarioSelecionado(usuario: any) {
+    this.usuarioSelecionado = usuario;
+  }
+
+  getUsuarioSelecionado() {
+    return this.usuarioSelecionado;
+  }
+
+  renovarSenha(matricula: string, password: string): Observable<any[]> {
+  const credentials = { matricula, password};
+  const headers = this.getAuthHeaders();
+  return this.http.post<any[]>(`${this.apiUrl}/admin/renovarsenha`, credentials, {headers});
+  }
+
+  getUserRoles(): string[] {
+    const rolesString = localStorage.getItem('roles');
+    if (rolesString) {
+      return rolesString.split(',');
+    }
+    return [];
+  }
+
+  isRenovacoesAllowed(): boolean {
+    const roles = this.getUserRoles();
+    const isRenovacoesAllowed = !!roles && roles.includes('ROLE_USER');
+    return isRenovacoesAllowed;
+  }
+
 }

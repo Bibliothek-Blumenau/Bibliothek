@@ -23,6 +23,11 @@ import { PerfilUsuarioComponent } from './sistema/perfil-usuario/perfil-usuario.
 import { DatePipe } from '@angular/common';
 import { EmprestimosComponent } from './sistema/emprestimos/emprestimos.component';
 import { RecomendacoesComponent } from './sistema/recomendacoes/recomendacoes.component';
+import { SwitchCredenciaisComponent } from './sistema/credenciais-usuario/credenciais-usuario.component';
+import { RecuperarSenhaComponent } from './recuperar-senha/recuperarsenha.component';
+import { SetCredenciaisComponent } from './sistema/editar-credenciais/editar-credenciais.component';
+import { RenovacoesComponent } from './sistema/renovacoes/renovacoes.component';
+import { UploadService } from './upload.service';
 
 @NgModule({
   declarations: [
@@ -45,9 +50,13 @@ import { RecomendacoesComponent } from './sistema/recomendacoes/recomendacoes.co
     PerfilUsuarioComponent,
     EmprestimosComponent,
     RecomendacoesComponent,
+    SwitchCredenciaisComponent,
+    RecuperarSenhaComponent,
+    SetCredenciaisComponent,
+    RenovacoesComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
-  providers: [DatePipe],
+  providers: [DatePipe, UploadService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

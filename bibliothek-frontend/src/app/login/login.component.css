@@ -59,6 +59,7 @@ fieldset {
   min-width: 100%;
   padding: 0;
   width: 100%;
+  display: flex;
 }
 
 input {
@@ -89,9 +90,6 @@ a {
   margin-top: 10px;
   text-decoration: none;
   color: black;
-}
-
-@media (max-width: 940px) {
 }
 
 .error-message {

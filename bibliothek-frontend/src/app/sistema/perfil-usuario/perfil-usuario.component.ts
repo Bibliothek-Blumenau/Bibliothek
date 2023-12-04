@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { AuthService } from 'src/app/auth.service';
 import { EmprestimoService } from 'src/app/emprestimo.service';
 import { DatePipe } from '@angular/common';
+import { HttpEventType } from '@angular/common/http';
+import { UploadService } from '../../upload.service';
 
 @Component({
   selector: 'app-perfil-usuario',
@@ -14,6 +16,7 @@ export class PerfilUsuarioComponent {
     fotoPerfil: localStorage.getItem('fotoPerfil') || '',
   };
 
+  selectedFile: File | null = null;
   message: string = '';
   mostrarInformacoes: boolean = true;
   mostrarFoto: boolean = false;
@@ -26,7 +29,8 @@ export class PerfilUsuarioComponent {
   constructor(
     private authService: AuthService,
     private emprestimoService: EmprestimoService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private uploadService: UploadService
   ) {}
 
   ngOnInit(): void {
@@ -47,7 +51,7 @@ export class PerfilUsuarioComponent {
   }
 
   getProfilePic(): string {
-    return localStorage.getItem('fotoPerfil') || '';
+    return localStorage.getItem('fotoPerfil') || '../../../assets/profile-picture.png';
   }
 
   mostrarAdicionarFoto() {
@@ -70,58 +74,62 @@ export class PerfilUsuarioComponent {
     this.mostrarSenha = false;
   }
 
-  alterarFotoPerfil() {
-    let novaFotoPerfil = this.usuario.fotoPerfil;
+  onFileSelected(event: any) {
+    this.selectedFile = <File>event.target.files[0];
+  }
 
-    if (!novaFotoPerfil) {
-      this.message = 'Por favor, selecione uma imagem.';
-      return;
-    }
-
-    if (novaFotoPerfil.match(/^data:image\/[^;]+;base64,/)) {
-      novaFotoPerfil = novaFotoPerfil.replace(/^data:image\/[^;]+;base64,/, '');
-    }
-
-    this.authService.uploadImageToImgbb(novaFotoPerfil).subscribe(
-      (response: any) => {
-        const imageUrl = response.data.url;
-        this.authService.atualizarFotoPerfil(imageUrl).subscribe(
-          () => {
+  onUpload() {
+    if (this.matricula && this.selectedFile) {
+      this.uploadService.alterarFotoPerfil(this.selectedFile, this.matricula).subscribe(
+        (event: any) => {
+          if (event && event.type === HttpEventType.Response) {
+            const newProfilePic = event.body;
+            localStorage.setItem('fotoPerfil', newProfilePic);
+            this.usuario.fotoPerfil = newProfilePic;
             this.messageSuccess = true;
             this.messageError = false;
-            this.message = 'Upload realizado com sucesso!';
-            this.voltarParaInformacoes();
-          },
-          (error) => {
+            this.message = 'Foto do perfil atualizada com sucesso!';
+            setTimeout(() => {
+              this.buscarFotoPerfil();
+              this.usuario.fotoPerfil = this.getProfilePic();
+            }, 500);
+          } else if (event && event.type === HttpEventType.UploadProgress) {
+            const percentDone = Math.round((event.loaded / event.total) * 100);
             this.messageSuccess = false;
-            this.messageError = true;
-            this.message = 'Erro ao atualizar a foto de perfil.';
-            console.error(error);
+            this.messageError = false;
+            this.message = `Carregando... ${percentDone}%`;
           }
-        );
-      },
-      (error) => {
-        this.messageSuccess = false;
-        this.messageError = true;
-        this.message = 'Erro ao fazer o upload da imagem.';
-        console.error(error);
-      }
-    );
-  }
-
-  onFileSelected(event: any) {
-    const file: File = event.target.files[0];
-
-    if (file) {
-      const reader = new FileReader();
-
-      reader.onload = (e) => {
-        this.usuario.fotoPerfil = reader.result as string;
-      };
-
-      reader.readAsDataURL(file);
+        },
+        (error) => {
+          this.messageSuccess = false;
+          this.messageError = true;
+          this.message = 'Erro ao carregar a foto do perfil.';
+          console.log(error);
+        }
+      );
     }
   }
+
+
+  private buscarFotoPerfil() {
+    if (this.matricula) {
+      this.uploadService.buscarFotoPerfil(this.matricula).subscribe(
+        (fotoPerfilBlob) => {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            const profilePicDataUrl = reader.result as string;
+            localStorage.setItem('fotoPerfil', profilePicDataUrl);
+            this.usuario.fotoPerfil = profilePicDataUrl;
+          };
+          reader.readAsDataURL(fotoPerfilBlob);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+  }
+
 
   alterarSenha() {
     const novaSenha = this.usuario.password;
@@ -130,6 +138,13 @@ export class PerfilUsuarioComponent {
       this.messageSuccess = false;
       this.messageError = true;
       this.message = 'A nova senha não pode estar vazia.';
+      return;
+    }
+
+    if(!novaSenha.trim() || this.usuario.password.startsWith(' ') || this.usuario.password.endsWith(' ')){
+      this.messageSuccess = false;
+      this.messageError = true;
+      this.message = 'A senha não deve começar ou terminar com espaços em branco.';
       return;
     }
 

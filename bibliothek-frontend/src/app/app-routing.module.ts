@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { RecuperarSenhaComponent } from './recuperar-senha/recuperarsenha.component';
 import { SistemaComponent } from './sistema/sistema.component';
 import { DetalhesLivroComponent } from './sistema/detalhes-livro/detalhes-livro.component';
 import { LivrosViewComponent } from './sistema/livros-view/livros-view.component';
@@ -13,6 +14,9 @@ import { AdminAuthGuard } from './admin.auth.guard';
 import { PerfilUsuarioComponent } from './sistema/perfil-usuario/perfil-usuario.component';
 import { ProfileGuard } from './profile.guard';
 import { EmprestimosComponent } from './sistema/emprestimos/emprestimos.component';
+import { SwitchCredenciaisComponent } from './sistema/credenciais-usuario/credenciais-usuario.component';
+import { SetCredenciaisComponent } from './sistema/editar-credenciais/editar-credenciais.component';
+import { RenovacoesComponent } from './sistema/renovacoes/renovacoes.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -20,6 +24,11 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent,
     title: 'Bibliothek - Login',
+  },
+  {
+    path: 'recuperar-senha',
+    component: RecuperarSenhaComponent,
+    title: 'Bibliothek - Esqueci minha senha'
   },
   {
     path: 'sistema',
@@ -68,6 +77,24 @@ const routes: Routes = [
     component: EmprestimosComponent,
     canActivate: [AuthGuard, AdminAuthGuard],
     title: 'Bibliothek - Empréstimos',
+  },
+  {
+    path: 'sistema/credenciaisusuarios',
+    component: SwitchCredenciaisComponent,
+    canActivate: [AuthGuard, AdminAuthGuard],
+    title: 'Bibliothek - Credenciais de Usuários',
+  },
+  {
+    path: 'sistema/editar-credenciais',
+    component: SetCredenciaisComponent,
+    canActivate: [AuthGuard, AdminAuthGuard],
+    title: 'Bibliothek - Editar Credenciais',
+  },
+  {
+    path: 'sistema/renovacoes',
+    component: RenovacoesComponent,
+    canActivate: [AuthGuard, AdminAuthGuard],
+    title: 'Bibliothek - Solicitar Renovações',
   },
 ];
 

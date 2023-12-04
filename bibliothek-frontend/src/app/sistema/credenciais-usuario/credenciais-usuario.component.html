@@ -1,0 +1,33 @@
+<main>
+  <app-navbar-sistema></app-navbar-sistema>
+  <div class="padding-bottom"></div>
+  <article class="container">
+    <div id="informacoes">
+      <div class="info">
+        <h3 class="info-header">Requisições de Alteração de Senhas</h3>
+        <div class="lista-usuarios container2" id="anchor">
+          <div class="lista-livro-header">
+            <p class="header-info">Foto de Perfil</p>
+            <p class="header-info">Número de Matricula</p>
+            <p class="header-info">Nome do Usuário</p>
+            <p class="header-info">Editar credenciais</p>
+          </div>
+          <a class="lista-livro-link" *ngFor="let users of usuario">
+            <div class="img-titulo">
+              <img class="lista-livro-img" [src]="users.fotoPerfil"/>
+              <div>
+                <h4 class="lista-users-credenciais">{{ users.matricula }}</h4>
+              </div>
+            </div>
+            <p class="lista-users-credenciais">{{ users.nomeCompleto }}</p>
+            <button (click)="editarCredenciais(users)">Editar</button>
+          </a>
+        </div>
+        <!--<div class="message" [class.sucesso]="messageSuccess" [class.erro]="messageError">
+          <h3>{{ message }}</h3>
+        </div> -->
+      </div>
+    </div>
+  </article>
+</main>
+<app-footer></app-footer>

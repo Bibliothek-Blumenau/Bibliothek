@@ -88,6 +88,10 @@ export class DetalhesLivroComponent implements OnInit {
             this.isButtonDisabled = true;
             return;
           }
+          if(this.livro?.disponibilidade === 0){
+            this.isButtonDisabled = true;
+            return;
+          }
         }
         this.isButtonDisabled = false;
       },
@@ -137,7 +141,7 @@ export class DetalhesLivroComponent implements OnInit {
       this.livroApiService.apagarLivro(this.livro.codLivro).subscribe(
         () => {
           this.message = '';
-          this.router.navigate(['/sistema/livros']);
+          this.router.navigate(['/sistema']);
         },
         (error) => {
           this.message = 'Erro ao apagar o livro.';

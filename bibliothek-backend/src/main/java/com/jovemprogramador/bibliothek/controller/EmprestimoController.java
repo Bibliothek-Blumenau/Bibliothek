@@ -1,20 +1,26 @@
 package com.jovemprogramador.bibliothek.controller;
 
+import java.math.BigDecimal;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.jovemprogramador.bibliothek.model.Emprestimo;
 import com.jovemprogramador.bibliothek.model.Livro;
 import com.jovemprogramador.bibliothek.model.User;
 import com.jovemprogramador.bibliothek.repository.EmprestimoRepository;
 import com.jovemprogramador.bibliothek.repository.LivroRepository;
 import com.jovemprogramador.bibliothek.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.math.BigDecimal;
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/emprestimos")
@@ -92,7 +98,7 @@ public class EmprestimoController {
 
         return ResponseEntity.ok().build();
     }
-
+    
     @PostMapping("/finalizar/{codEmprestimo}")
     public ResponseEntity<String> finalizarEmprestimo(@PathVariable long codEmprestimo) {
         Emprestimo emprestimo = emprestimoRepository.findById(codEmprestimo)
@@ -110,7 +116,7 @@ public class EmprestimoController {
         if (dataAtual.isAfter(emprestimo.getDataEntrega())) {
             long diasAtraso = Duration.between(emprestimo.getDataEntrega(), dataAtual).toDays();
             BigDecimal multaPorDia = new BigDecimal("1");
-            emprestimo.setMulta((multaPorDia.multiply(BigDecimal.valueOf(diasAtraso))));
+            emprestimo.setMulta(multaPorDia.multiply(BigDecimal.valueOf(diasAtraso)));
         } else {
             emprestimo.setMulta(BigDecimal.ZERO);
         }
@@ -120,8 +126,8 @@ public class EmprestimoController {
 
         return ResponseEntity.ok().build();
     }
-
-    @PutMapping("/emprestimo/{codEmprestimo}")  //Working
+    
+    @PutMapping("/emprestimo/{codEmprestimo}")
     public ResponseEntity<String> renovarEmprestimo(@PathVariable long codEmprestimo) {
         Emprestimo emprestimo = emprestimoRepository.findById(codEmprestimo)
                 .orElseThrow(() -> new IllegalArgumentException("Empréstimo não encontrado"));
@@ -129,7 +135,7 @@ public class EmprestimoController {
         if (emprestimo.getStatus().equals("Pendente")) {
             return ResponseEntity.badRequest().body("Este empréstimo não está pendente.");
         }else if(emprestimo.getStatus().equals("Finalizado")) {
-            return ResponseEntity.badRequest().body("Este empréstimo está Finalizado.");
+        	return ResponseEntity.badRequest().body("Este empréstimo está Finalizado.");
         }
         emprestimo.setDataEntrega(emprestimo.getDataEntrega().plusDays(7));
         emprestimo.setStatus("Renovado");
@@ -137,5 +143,25 @@ public class EmprestimoController {
 
         return ResponseEntity.ok().build();
     }
+    
+    @PostMapping("user/solicitar/{codEmprestimo}")
+    public ResponseEntity<String> solicitarEmprestimo(@PathVariable long codEmprestimo) {
+        Emprestimo emprestimo = emprestimoRepository.findById(codEmprestimo)
+                .orElseThrow(() -> new IllegalArgumentException("Empréstimo não encontrado"));
 
+        if (emprestimo.getStatus().equals("Pendente")) {
+            emprestimo.setSolicitacaoEmprestimo(true);
+            emprestimo.setStatus("Solicitado");
+            emprestimoRepository.save(emprestimo);
+            return ResponseEntity.badRequest().body("Este empréstimo está pendente.");
+        }else if(emprestimo.getStatus().equals("Finalizado")) {
+        	return ResponseEntity.badRequest().body("Este empréstimo está Finalizado.");
+        }
+        emprestimo.setSolicitacaoEmprestimo(true);
+        emprestimo.setStatus("Solicitado");
+        emprestimoRepository.save(emprestimo);
+
+        return ResponseEntity.ok().build();
+    }
+    
 }
