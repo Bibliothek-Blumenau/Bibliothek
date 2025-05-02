@@ -1,9 +1,11 @@
 package com.jovemprogramador.bibliothek.controller;
 
-import com.jovemprogramador.bibliothek.model.Livro;
-import com.jovemprogramador.bibliothek.repository.LivroRepository;
+import com.jovemprogramador.bibliothek.domain.book.BookEntity;
+import com.jovemprogramador.bibliothek.domain.book.BookRepository;
+import com.jovemprogramador.bibliothek.domain.book.BookService;
+import com.jovemprogramador.bibliothek.domain.book.dto.BookResponseDTO;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,67 +15,67 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/livros")
-@CrossOrigin
-public class LivroController {
+@RequiredArgsConstructor
+@RequestMapping("/api/book")
+public class BookController {
 
-    @Autowired
-    private LivroRepository livroRepository;
+    private final BookRepository bookRepository;
+    private final BookService bookService;
 
     @GetMapping
-    public Page<Livro> findAllReversed(
+    public Page<BookEntity> findAllReversed(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size
     ) {
         Sort sort = Sort.by(Sort.Order.desc("codLivro"));
         Pageable pageable = PageRequest.of(page, size, sort);
 
-        return livroRepository.findAll(pageable);
+        return bookRepository.findAll(pageable);
     }
 
-    @GetMapping("/{codLivro}")
-    public Livro findById(@PathVariable long codLivro) {
-        return livroRepository.findById(codLivro);
+    @GetMapping("/{id}")
+    public ResponseEntity<BookResponseDTO> findById(@PathVariable String id) {
+        return ResponseEntity.ok(bookService.findById(id));
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public void create(@RequestBody @Valid Livro livro) {
-        livro.setDisponibilidade(livro.getEstoque());
-        livroRepository.save(livro);
+    public void create(@RequestBody @Valid BookEntity bookEntity) {
+        bookEntity.setDisponibilidade(bookEntity.getEstoque());
+        bookRepository.save(bookEntity);
     }
 
     @PutMapping("/{codLivro}")
-    public void update(@Valid @RequestBody Livro livro, @PathVariable long codLivro) {
-        if (!livroRepository.existsById(codLivro)) {
+    public void update(@Valid @RequestBody BookEntity bookEntity, @PathVariable long codLivro) {
+        if (!bookRepository.existsById(codLivro)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Livro não encontrado.");
         }
 
-        Livro livroAtual = livroRepository.findById(codLivro);
+        BookEntity bookEntityAtual = bookRepository.findById(codLivro);
 
-        int estoqueAnterior = livroAtual.getEstoque();
-        int estoqueNovo = livro.getEstoque();
-        int disponibilidadeAtual = livroAtual.getDisponibilidade();
+        int estoqueAnterior = bookEntityAtual.getEstoque();
+        int estoqueNovo = bookEntity.getEstoque();
+        int disponibilidadeAtual = bookEntityAtual.getDisponibilidade();
 
         if (estoqueNovo != estoqueAnterior) {
             int diferencaEstoque = estoqueNovo - estoqueAnterior;
             int novaDisponibilidade = disponibilidadeAtual + diferencaEstoque;
-            livro.setDisponibilidade(novaDisponibilidade);
+            bookEntity.setDisponibilidade(novaDisponibilidade);
         } else {
-            livro.setDisponibilidade(disponibilidadeAtual);
+            bookEntity.setDisponibilidade(disponibilidadeAtual);
         }
 
-        livroRepository.save(livro);
+        bookRepository.save(bookEntity);
     }
 
     @DeleteMapping("/{codLivro}")
     public void delete(@PathVariable long codLivro) {
-        livroRepository.deleteById(codLivro);
+        bookRepository.deleteById(codLivro);
     }
 
     @GetMapping("/destaque")
-    public List<Livro> getLivrosEmDestaque() {
-        List<Livro> livrosEmDestaque = livroRepository.findByDestaqueIsTrue();
+    public List<BookEntity> getLivrosEmDestaque() {
+        List<BookEntity> livrosEmDestaque = bookRepository.findByDestaqueIsTrue();
         if (livrosEmDestaque.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Nenhum livro em destaque encontrado.");
         }
@@ -81,7 +83,7 @@ public class LivroController {
     }
 
     @GetMapping("/busca")
-    public ResponseEntity<List<Livro>> buscarLivrosPorTipo(
+    public ResponseEntity<List<BookEntity>> buscarLivrosPorTipo(
             @RequestParam(name = "titulo", required = false) String titulo,
             @RequestParam(name = "tipo", required = false) String tipo) {
 
@@ -89,13 +91,13 @@ public class LivroController {
             titulo = "%" + titulo + "%";
 
             if (tipo.equals("titulo")) {
-                List<Livro> livrosList = livroRepository.findAllByTituloLike(titulo);
+                List<BookEntity> livrosList = bookRepository.findAllByTituloLike(titulo);
                 return ResponseEntity.ok(livrosList);
             } else if (tipo.equals("autor")) {
-                List<Livro> livrosList = livroRepository.findAllByAutorLike(titulo);
+                List<BookEntity> livrosList = bookRepository.findAllByAutorLike(titulo);
                 return ResponseEntity.ok(livrosList);
             } else if (tipo.equals("genero")) {
-                List<Livro> livrosList = livroRepository.findAllByGeneroLike(titulo);
+                List<BookEntity> livrosList = bookRepository.findAllByGeneroLike(titulo);
                 return ResponseEntity.ok(livrosList);
             }
         }
@@ -103,9 +105,9 @@ public class LivroController {
         return ResponseEntity.badRequest().build();
     }
     @GetMapping("/recomendacoes")
-    public ResponseEntity<List<Livro>> buscarLivrosRecomendadosPorGenero(
+    public ResponseEntity<List<BookEntity>> buscarLivrosRecomendadosPorGenero(
             @RequestParam(name = "genero") String genero) {
-        List<Livro> recomendacoes = livroRepository.findAllByGeneroLike(genero);
+        List<BookEntity> recomendacoes = bookRepository.findAllByGeneroLike(genero);
         return ResponseEntity.ok(recomendacoes);
     }
 }

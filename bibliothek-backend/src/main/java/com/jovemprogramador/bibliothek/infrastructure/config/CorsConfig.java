@@ -1,4 +1,4 @@
-package com.jovemprogramador.bibliothek.security;
+package com.jovemprogramador.bibliothek.infrastructure.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

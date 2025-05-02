@@ -6,6 +6,7 @@ import com.jovemprogramador.bibliothek.domain.user.UserService;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,8 +35,8 @@ public class UserController {
         return ResponseEntity.ok(userService.findByRegistration(registration));
     }
 
-    @PutMapping("/{registration}/registration")
-    public ResponseEntity<> updateRegistration(@PathVariable String registration, @RequestBody UserEntity updatedUser) {
+    @PutMapping("/{matricula}/registration")
+    public ResponseEntity<> updateRegistration(@PathVariable String matricula, @RequestBody UserEntity updatedUser) {
         UserEntity existingUser = repository.findByRegistration(matricula);
         if (existingUser == null) {
             return ResponseEntity.notFound().build();
@@ -45,8 +46,8 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/{registration}/picture")
-    public ResponseEntity<?> updatePicture(@PathVariable String registration, @RequestBody UserEntity updatedUser) {
+    @PutMapping("/{matricula}/foto")
+    public ResponseEntity<?> updateFoto(@PathVariable String matricula, @RequestBody UserEntity updatedUser) {
         UserEntity existingUser = repository.findByRegistration(matricula);
         if (existingUser == null) {
             return ResponseEntity.notFound().build();
@@ -56,8 +57,8 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/{registration}/password")
-    public ResponseEntity<?> updatePassword(@PathVariable String registration, @RequestBody UserEntity updatedUser) {
+    @PutMapping("/{matricula}/senha")
+    public ResponseEntity<?> updateSenha(@PathVariable String matricula, @RequestBody UserEntity updatedUser) {
         UserEntity existingUser = repository.findByRegistration(matricula);
         if (existingUser == null) {
             return ResponseEntity.notFound().build();
