@@ -30,8 +30,8 @@ export class AuthService {
     return expirationDate > new Date();
   }
 
-  login(matricula: string, password: string): Observable<any> {
-    const credentials = { matricula, password };
+  login(registration: string, password: string): Observable<any> {
+    const credentials = { registration, password };
     return this.http.post(`${this.apiUrl}/login`, credentials);
   }
 

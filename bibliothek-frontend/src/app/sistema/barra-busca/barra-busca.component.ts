@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { LivroApiService } from '../../livro-api.service';
-import { LivroSearch } from '../../livro-search';
+import { LivroApiService } from '../../core/services/livro-api.service';
+import { LivroSearch } from '../../core/models/livro-search';
 import { Router } from '@angular/router';
-import { ResultadoBuscaService } from 'src/app/resultado-busca.service';
+import { ResultadoBuscaService } from 'src/app/core/services/resultado-busca.service';
 
 @Component({
   selector: 'app-barra-busca',

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LivroApiService } from '../../livro-api.service';
+import { LivroApiService } from '../../core/services/livro-api.service';
 import { Observable, of } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
-import { Livro } from 'src/app/livro';
-import { EmprestimoService } from 'src/app/emprestimo.service';
+import { Livro } from 'src/app/core/models/livro';
+import { EmprestimoService } from 'src/app/core/services/emprestimo.service';
 
 @Component({
   selector: 'app-detalhes-livro',

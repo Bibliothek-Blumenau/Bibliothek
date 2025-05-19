@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthService } from 'src/app/auth.service';
-import { EmprestimoService } from 'src/app/emprestimo.service';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { EmprestimoService } from 'src/app/core/services/emprestimo.service';
 import { DatePipe } from '@angular/common';
 
 @Component({

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { LivroApiService } from 'src/app/livro-api.service';
-import { Livro } from 'src/app/livro';
+import { LivroApiService } from 'src/app/core/services/livro-api.service';
+import { Livro } from 'src/app/core/models/livro';
 
 @Component({
   selector: 'app-cadastrar-livros',

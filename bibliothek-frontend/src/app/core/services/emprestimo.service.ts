@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class EmprestimoService {
-  private apiUrl = 'http://localhost:8080/api/emprestimos';
+  private apiUrl = 'http://localhost:8080/api/loan';
 
   constructor(private http: HttpClient) {}
 

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Livro } from 'src/app/livro';
-import { LivroApiService } from 'src/app/livro-api.service';
+import { Livro } from 'src/app/core/models/livro';
+import { LivroApiService } from 'src/app/core/services/livro-api.service';
 
 @Component({
   selector: 'app-recomendacoes',

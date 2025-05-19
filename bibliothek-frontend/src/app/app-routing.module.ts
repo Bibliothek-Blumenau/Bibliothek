@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './features/login/login.component';
 import { SistemaComponent } from './sistema/sistema.component';
 import { DetalhesLivroComponent } from './sistema/detalhes-livro/detalhes-livro.component';
 import { LivrosViewComponent } from './sistema/livros-view/livros-view.component';
 import { TodosOsLivrosComponent } from './sistema/todos-os-livros/todos-os-livros.component';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './core/guards/auth.guard';
 import { CadastrarLivrosComponent } from './sistema/cadastrar-livros/cadastrar-livros.component';
 import { CadastrarUsuarioComponent } from './sistema/cadastrar-usuario/cadastrar-usuario.component';
-import { AdminAuthGuard } from './admin.auth.guard';
+import { AdminAuthGuard } from './core/guards/admin.auth.guard';
 import { PerfilUsuarioComponent } from './sistema/perfil-usuario/perfil-usuario.component';
-import { ProfileGuard } from './profile.guard';
+import { ProfileGuard } from './core/guards/profile.guard';
 import { EmprestimosComponent } from './sistema/emprestimos/emprestimos.component';
+import { HomeComponent } from './features/home/home.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { ResultadoBuscaService } from 'src/app/resultado-busca.service'; // Importe o serviço
-import { Livro } from 'src/app/livro';
+import { ResultadoBuscaService } from 'src/app/core/services/resultado-busca.service'; // Importe o serviço
+import { Livro } from 'src/app/core/models/livro';
 
 @Component({
   selector: 'app-busca-livros',

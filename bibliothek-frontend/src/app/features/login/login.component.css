@@ -6,7 +6,7 @@ main {
 
 .imagem-lateral {
   border-radius: 25px 0 0 25px;
-  background-image: url(../../assets/img-login.jpg);
+  background-image: url(../../../assets/img-login.jpg);
   background-size: cover;
   width: 502px;
   height: 641px;
