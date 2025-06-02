@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable, map, tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
+import { UserInfo } from '../models/user-info';
+import { TokenData } from '../models/token-data';
+import { LoginResponse } from '../models/login-response';
 
 @Injectable({
   providedIn: 'root',
@@ -24,15 +27,15 @@ export class AuthService {
       return false;
     }
 
-    const tokenData = JSON.parse(atob(token.split('.')[1]));
+    const tokenData: TokenData = JSON.parse(atob(token.split('.')[1]));
     const expirationDate = new Date(tokenData.exp * 1000);
 
     return expirationDate > new Date();
   }
 
-  login(registration: string, password: string): Observable<any> {
+  login(registration: string, password: string): Observable<LoginResponse> {
     const credentials = { registration, password };
-    return this.http.post(`${this.apiUrl}/login`, credentials);
+    return this.http.post<LoginResponse>(`${this.apiUrl}/login`, credentials);
   }
 
   registerUser(registerRequest: any): Observable<any> {
@@ -42,19 +45,9 @@ export class AuthService {
     });
   }
 
-  getUserInfo(
-    matricula: string
-  ): Observable<{ nomeCompleto: string; roles: string; fotoPerfil: string }> {
+  getUserInfo(matricula: string): Observable<UserInfo> {
     const headers = this.getAuthHeaders();
-    return this.http
-      .get<any>(`http://localhost:8080/api/users/${matricula}`, { headers })
-      .pipe(
-        map((response: any) => ({
-          nomeCompleto: response.nomeCompleto,
-          roles: response.roles,
-          fotoPerfil: response.fotoPerfil,
-        }))
-      );
+    return this.http.get<UserInfo>(`http://localhost:8080/api/user/${matricula}`, { headers });
   }
 
   atualizarFotoPerfil(novaFotoPerfil: string): Observable<any> {
@@ -73,6 +66,7 @@ export class AuthService {
         })
       );
   }
+  
   uploadImageToImgbb(imageData: string): Observable<any> {
     const formData = new FormData();
     formData.append('key', 'd0176b7d250adadd6c772429c8ff233b');
@@ -97,20 +91,19 @@ export class AuthService {
   }
 
   isAdmin(): boolean {
-    const roles = localStorage.getItem('roles');
-    return !!roles && roles.includes('ROLE_ADMIN');
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      return false;
+    }
+
+    const tokenData: TokenData = JSON.parse(atob(token.split('.')[1]));
+
+    return tokenData.role.includes('ROLE_ADMIN');
   }
 
   logout(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('matricula');
-    localStorage.removeItem('nomeCompleto');
-    localStorage.removeItem('roles');
-    localStorage.removeItem('fotoPerfil');
+    localStorage.clear();
     this.router.navigate(['/']);
-  }
-
-  navigateToSistema(): void {
-    this.router.navigate(['/sistema']);
   }
 }

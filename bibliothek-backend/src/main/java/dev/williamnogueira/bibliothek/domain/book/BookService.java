@@ -7,6 +7,7 @@ import dev.williamnogueira.bibliothek.domain.book.mapper.BookMapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,26 +29,11 @@ public class BookService {
     }
 
     @Transactional(readOnly = true)
-    public Page<BookResponseDTO> findAllPaginated(Pageable pageable) {
-        return bookRepository.findAll(pageable).map(BookMapper::toDto);
+    public Page<BookResponseDTO> findAllWithFilter(String searchQuery, Pageable pageable) {
+        return bookRepository.filterBooks(searchQuery, pageable).map(BookMapper::toDto);
     }
 
-    @Transactional
-    public BookResponseDTO create(BookRequestDTO book) {
-        return BookMapper.toDto(bookRepository.save(BookMapper.toEntity(book)));
-    }
-
-    @Transactional
-    public void deleteById(String id) {
-        var book = getEntity(UUID.fromString(id));
-        bookRepository.delete(book);
-    }
-
-    public BookEntity getEntity(UUID id) {
-        return bookRepository.findById(id)
-                .orElseThrow(() -> new BookNotFoundException("Book not found"));
-    }
-
+    @Transactional(readOnly = true)
     public List<BookResponseDTO> getFeaturedBooks() {
         List<BookEntity> featuredBooks = bookRepository.findByFeaturedIsTrue();
         if (featuredBooks.isEmpty()) {
@@ -58,6 +44,21 @@ public class BookService {
                 .toList();
     }
 
+    @Transactional(readOnly = true)
+    public List<BookResponseDTO> getRecommendationsByGenre(String genre) {
+        var limitFive = PageRequest.of(0, 5);
+        return bookRepository.getRecommendationsByGenre(genre, limitFive)
+                .stream()
+                .map(BookMapper::toDto)
+                .toList();
+    }
+
+    @Transactional
+    public BookResponseDTO create(BookRequestDTO book) {
+        return BookMapper.toDto(bookRepository.save(BookMapper.toEntity(book)));
+    }
+
+    @Transactional
     public BookResponseDTO updateById(String id, @Valid BookRequestDTO book) {
         var bookToUpdate = getEntity(UUID.fromString(id));
         var bookToSave = BookMapper.toEntity(book);
@@ -69,5 +70,16 @@ public class BookService {
         }
 
         return BookMapper.toDto(bookRepository.save(bookToSave));
+    }
+
+    @Transactional
+    public void deleteById(String id) {
+        var book = getEntity(UUID.fromString(id));
+        bookRepository.delete(book);
+    }
+
+    public BookEntity getEntity(UUID id) {
+        return bookRepository.findById(id)
+                .orElseThrow(() -> new BookNotFoundException("Book not found"));
     }
 }

@@ -1,5 +1,6 @@
 package dev.williamnogueira.bibliothek.infrastructure.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
@@ -9,12 +10,15 @@ import org.springframework.web.filter.CorsFilter;
 @Configuration
 public class CorsConfig {
 
+    @Value("${api.security.origin.url}")
+    private String ORIGIN_URL;
+
     @Bean
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
 
-        config.addAllowedOrigin("*"); // Mudar para URL do site após publicar o projeto
+        config.addAllowedOrigin(ORIGIN_URL);
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
 

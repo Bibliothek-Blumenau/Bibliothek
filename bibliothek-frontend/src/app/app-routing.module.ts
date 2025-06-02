@@ -1,71 +1,55 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './features/login/login.component';
-import { SistemaComponent } from './sistema/sistema.component';
-import { DetalhesLivroComponent } from './sistema/detalhes-livro/detalhes-livro.component';
-import { LivrosViewComponent } from './sistema/livros-view/livros-view.component';
-import { TodosOsLivrosComponent } from './sistema/todos-os-livros/todos-os-livros.component';
+import { PlatformComponent } from './features/platform/platform.component';
+import { BookDetailsComponent } from './features/platform/book-details/book-details.component';
 import { AuthGuard } from './core/guards/auth.guard';
-import { CadastrarLivrosComponent } from './sistema/cadastrar-livros/cadastrar-livros.component';
-import { CadastrarUsuarioComponent } from './sistema/cadastrar-usuario/cadastrar-usuario.component';
+import { NewBookComponent } from './features/platform/new-book/new-book.component';
+import { NewUserComponent } from './features/platform/new-user/new-user.component';
 import { AdminAuthGuard } from './core/guards/admin.auth.guard';
-import { PerfilUsuarioComponent } from './sistema/perfil-usuario/perfil-usuario.component';
+import { UserProfileComponent } from './features/platform/user-profile/user-profile.component';
 import { ProfileGuard } from './core/guards/profile.guard';
-import { EmprestimosComponent } from './sistema/emprestimos/emprestimos.component';
-import { HomeComponent } from './features/home/home.component';
+import { LoansComponent } from './features/platform/loans/loans.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
   {
-    path: 'login',
+    path: '',
     component: LoginComponent,
     title: 'Bibliothek - Login',
   },
   {
-    path: 'sistema',
-    component: SistemaComponent,
+    path: 'platform',
+    component: PlatformComponent,
     canActivate: [AuthGuard],
     title: 'Bibliothek - Plataforma',
   },
   {
-    path: 'sistema/detalhes/:codLivro',
-    component: DetalhesLivroComponent,
+    path: 'platform/details/:bookId',
+    component: BookDetailsComponent,
     canActivate: [AuthGuard],
     title: 'Bibliothek - Detalhes',
   },
   {
-    path: 'sistema/livros',
-    component: TodosOsLivrosComponent,
-    canActivate: [AuthGuard],
-    title: 'Bibliothek - Livros',
-  },
-  {
-    path: 'sistema/buscarlivros',
-    component: LivrosViewComponent,
-    canActivate: [AuthGuard],
-    title: 'Bibliothek - Buscar Livros',
-  },
-  {
-    path: 'sistema/usuario/:matricula',
-    component: PerfilUsuarioComponent,
+    path: 'platform/user/:registration',
+    component: UserProfileComponent,
     canActivate: [AuthGuard, ProfileGuard],
     title: 'Bibliothek - Perfil',
   },
   {
-    path: 'sistema/cadastrarlivros',
-    component: CadastrarLivrosComponent,
+    path: 'platform/newBook',
+    component: NewBookComponent,
     canActivate: [AuthGuard, AdminAuthGuard],
     title: 'Bibliothek - Cadastro de Livros',
   },
   {
     path: 'sistema/cadastrarusuario',
-    component: CadastrarUsuarioComponent,
+    component: NewUserComponent,
     canActivate: [AuthGuard, AdminAuthGuard],
     title: 'Bibliothek - Cadastro de Usuários',
   },
   {
     path: 'sistema/emprestimos',
-    component: EmprestimosComponent,
+    component: LoansComponent,
     canActivate: [AuthGuard, AdminAuthGuard],
     title: 'Bibliothek - Empréstimos',
   },

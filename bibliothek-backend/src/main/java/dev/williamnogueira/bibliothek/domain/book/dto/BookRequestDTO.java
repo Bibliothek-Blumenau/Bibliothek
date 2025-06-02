@@ -1,10 +1,12 @@
 package dev.williamnogueira.bibliothek.domain.book.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Builder;
 
 @Builder
 public record BookRequestDTO(
+        String id,
         @NotBlank
         String title,
         @NotBlank
@@ -13,11 +15,10 @@ public record BookRequestDTO(
         String author,
         @NotBlank
         String publisher,
-        @NotBlank
+        @PositiveOrZero
         Integer stock,
-        @NotBlank
+        @PositiveOrZero
         Integer availableStock,
-        @NotBlank
         String coverImage,
         @NotBlank
         String description,

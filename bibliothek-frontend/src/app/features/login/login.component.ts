@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../core/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,41 +8,41 @@ import { AuthService } from '../../core/services/auth.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  matricula: string = '';
+  registration: string = '';
   password: string = '';
   errorMessage: string = '';
+  isLoading = false;
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService, 
+    private readonly router: Router
+  ) {}
 
   onSubmit() {
-    this.authService.login(this.matricula, this.password).subscribe(
-      (response: any) => {
-        if (response && response.token) {
+    this.isLoading = true;
+    this.authService.login(this.registration, this.password).subscribe({
+      next: (response) => {
           localStorage.setItem('token', response.token);
-          localStorage.setItem('matricula', this.matricula);
-          this.authService.getUserInfo(this.matricula).subscribe(
-            (userInfo: {
-              nomeCompleto: string;
-              roles: string;
-              fotoPerfil: string;
-            }) => {
-              localStorage.setItem('nomeCompleto', userInfo.nomeCompleto);
-              localStorage.setItem('roles', userInfo.roles);
-              localStorage.setItem('fotoPerfil', userInfo.fotoPerfil);
-            },
-            (error: any) => {
-              console.error('Failed to fetch user info', error);
-            }
-          );
-          this.authService.navigateToSistema();
-        } else {
-          this.errorMessage = 'Matrícula ou senha invalida.';
-        }
+          localStorage.setItem('registration', this.registration);
+          this.getUserInfo();
       },
-      (error: any) => {
-        console.error('Login failed', error);
+      error: () => {
         this.errorMessage = 'Matrícula ou senha invalida.';
+        this.isLoading = false;
       }
-    );
+    });
+  }
+  
+  private getUserInfo() {
+    this.authService.getUserInfo(this.registration).subscribe({
+      next: (userInfo) => {
+        localStorage.setItem('name', userInfo.name);
+        localStorage.setItem('profilePic', userInfo.profilePic);
+
+        this.router.navigate(['/platform']);
+      },
+      error: () => this.errorMessage = 'Matrícula ou senha invalida.',
+      complete: () => this.isLoading = false
+    })
   }
 }

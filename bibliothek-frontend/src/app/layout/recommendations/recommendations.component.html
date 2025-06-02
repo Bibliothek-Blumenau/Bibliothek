@@ -1,0 +1,25 @@
+<div class="container" *ngIf="recommendations.length > 0">
+    <h2>Leia também</h2>
+    <div class="lista-livros container" id="anchor">
+        <div class="lista-livro-header">
+            <p class="header-titulo">Título</p>
+            <p class="header-editora">Editora</p>
+            <p class="header-genero">Gênero</p>
+            <p class="header-detalhes">Detalhes</p>
+        </div>
+        <a class="lista-livro-link" 
+            [routerLink]="['/platform/details', recommendation.id]"
+            *ngFor="let recommendation of recommendations">
+            <div class="img-titulo">
+                <img class="lista-livro-img" [src]="recommendation.coverImage" alt="{{ recommendation.title }}" />
+                <div>
+                    <h4 class="lista-livro-titulo">{{ recommendation.title }}</h4>
+                    <p class="lista-livro-autor">{{ recommendation.author }}</p>
+                </div>
+            </div>
+            <p class="lista-livro-editora">{{ recommendation.publisher }}</p>
+            <p class="lista-livro-genero">{{ recommendation.genre }}</p>
+            <a class="mais-detalhes" [routerLink]="['/platform/details', recommendation.id]">Mais Detalhes</a>
+        </a>
+    </div>
+</div>

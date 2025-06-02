@@ -28,10 +28,6 @@ public class GlobalExceptionHandler {
         return buildErrorResponse(ex.getMessage(), status.value(), status.getReasonPhrase(), request);
     }
 
-    private void logException(Exception ex) {
-        log.error(ex.getMessage(), ex);
-    }
-
     private ResponseEntity<Object> buildErrorResponse(String message, Integer code, String reason, WebRequest request) {
         Map<String, Object> body = Map.of(
                 "timestamp", LocalDateTime.now(),
@@ -41,5 +37,9 @@ public class GlobalExceptionHandler {
                 "path", request.getDescription(false).replace("uri=", "")
         );
         return new ResponseEntity<>(body, HttpStatus.valueOf(code));
+    }
+
+    private void logException(Exception ex) {
+        log.error(ex.getMessage(), ex);
     }
 }

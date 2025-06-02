@@ -8,7 +8,10 @@ import dev.williamnogueira.bibliothek.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -23,7 +26,7 @@ public class LoanController {
 
     @GetMapping
     public ResponseEntity<List<LoanEntity>> getTodosEmprestimos() {
-        Sort sort = Sort.by(Sort.Order.desc("codEmprestimo"));
+        Sort sort = Sort.by(Sort.Order.desc("id"));
 
         List<LoanEntity> loanEntities = loanRepository.findAll(sort);
 
@@ -35,7 +38,7 @@ public class LoanController {
         UserEntity usuario = userRepository.findById(matricula)
                 .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado"));
 
-        Sort sort = Sort.by(Sort.Order.desc("codEmprestimo"));
+        Sort sort = Sort.by(Sort.Order.desc("id"));
 
         List<LoanEntity> loanEntities = loanRepository.findByUser(usuario, sort);
 

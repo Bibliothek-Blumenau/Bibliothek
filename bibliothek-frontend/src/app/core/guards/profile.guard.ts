@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-  Router,
-} from '@angular/router';
+import { ActivatedRouteSnapshot, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -11,18 +7,15 @@ import {
 export class ProfileGuard {
   constructor(private router: Router) {}
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): boolean {
-    const matriculaFromUrl = route.paramMap.get('matricula');
-    const matriculaFromLocalStorage = localStorage.getItem('matricula');
+  canActivate(route: ActivatedRouteSnapshot): boolean {
+    const registrationFromUrl = route.paramMap.get('registration');
+    const registrationFromLocalStorage = localStorage.getItem('registration');
 
-    if (matriculaFromUrl === matriculaFromLocalStorage) {
-      return true;
-    } else {
-      this.router.navigate(['/sistema']);
+    if (registrationFromUrl !== registrationFromLocalStorage) {
+      this.router.navigate(['/platform']);
       return false;
     }
+
+    return true;
   }
 }

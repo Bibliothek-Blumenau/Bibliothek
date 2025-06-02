@@ -5,46 +5,38 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './features/login/login.component';
-import { SistemaComponent } from './sistema/sistema.component';
-import { NavbarSistemaComponent } from './sistema/navbar-sistema/navbar-sistema.component';
-import { EmDestaqueComponent } from './sistema/em-destaque/em-destaque.component';
-import { ListaLivrosComponent } from './sistema/lista-livros/lista-livros.component';
-import { DetalhesLivroComponent } from './sistema/detalhes-livro/detalhes-livro.component';
-import { LivrosViewComponent } from './sistema/livros-view/livros-view.component';
-import { BarraBuscaComponent } from './sistema/barra-busca/barra-busca.component';
-import { BuscaLivrosComponent } from './sistema/busca-livros/busca-livros.component';
-import { TodosOsLivrosComponent } from './sistema/todos-os-livros/todos-os-livros.component';
+import { PlatformComponent } from './features/platform/platform.component';
+import { NavbarComponent } from './layout/navbar/navbar.component';
+import { FeaturedBooksComponent } from './layout/featured-books/featured-books.component';
+import { ListBooksComponent } from './features/platform/list-books/list-books.component';
+import { BookDetailsComponent } from './features/platform/book-details/book-details.component';
+import { BarraBuscaComponent } from './layout/search-bar/search-bar.component';
 import { FooterComponent } from './layout/footer/footer.component';
-import { CadastrarLivrosComponent } from './sistema/cadastrar-livros/cadastrar-livros.component';
-import { CadastrarUsuarioComponent } from './sistema/cadastrar-usuario/cadastrar-usuario.component';
-import { PerfilUsuarioComponent } from './sistema/perfil-usuario/perfil-usuario.component';
+import { NewBookComponent } from './features/platform/new-book/new-book.component';
+import { NewUserComponent } from './features/platform/new-user/new-user.component';
+import { UserProfileComponent } from './features/platform/user-profile/user-profile.component';
 import { DatePipe } from '@angular/common';
-import { EmprestimosComponent } from './sistema/emprestimos/emprestimos.component';
-import { RecomendacoesComponent } from './sistema/recomendacoes/recomendacoes.component';
-import { HomeComponent } from './features/home/home.component';
-import { NavbarComponent } from './features/home/navbar/navbar.component';
+import { LoansComponent } from './features/platform/loans/loans.component';
+import { Recommendationsomponent } from './layout/recommendations/recommendations.component';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     LoginComponent,
-    SistemaComponent,
+    PlatformComponent,
     NavbarComponent,
-    NavbarSistemaComponent,
-    EmDestaqueComponent,
-    ListaLivrosComponent,
-    DetalhesLivroComponent,
-    LivrosViewComponent,
+    FeaturedBooksComponent,
+    ListBooksComponent,
+    BookDetailsComponent,
     BarraBuscaComponent,
-    BuscaLivrosComponent,
-    TodosOsLivrosComponent,
     FooterComponent,
-    CadastrarLivrosComponent,
-    CadastrarUsuarioComponent,
-    PerfilUsuarioComponent,
-    EmprestimosComponent,
-    RecomendacoesComponent,
+    NewBookComponent,
+    NewUserComponent,
+    UserProfileComponent,
+    LoansComponent,
+    Recommendationsomponent,
+    LoadingSpinnerComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [DatePipe],
